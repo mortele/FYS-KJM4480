@@ -6,7 +6,8 @@ format;
 
 
 %% Parameters
-N = 6;      % Number of particles.
+N = 2
+;      % Number of particles.
 
 
 %% Load integrals from file
@@ -69,7 +70,7 @@ end
 
 
 %% Set up the CIS matrix
-H   = zeros(3,3);
+H = zeros(3,3);
 
 % Elements of the CIS matrix.
 H(1,1) = E_ref;
@@ -93,8 +94,8 @@ E_CIS = eig(H);
 
 fprintf('E_ref = %f, E_CIS = %f\n\n',E_ref, E_CIS(1));
 
-% assignin('base', 'A', A);
-% assignin('base', 'E_ref', E_ref);
-% assignin('base', 'H', H);
-% assignin('base', 'E_CIS', E_CIS);
+assignin('base', 'A', A);
+assignin('base', 'E_ref', E_ref);
+assignin('base', 'H', H);
+assignin('base', 'E_CIS', E_CIS);
 end
