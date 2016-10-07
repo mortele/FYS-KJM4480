@@ -8,7 +8,7 @@ format short;
 %% Parameters
 N               = 2;  % Number of particles.
 L               = 12; % Number of basis functions. 
-maxIterations   = 20; % Maximum number of SCT iterations.
+maxIterations   = 5; % Maximum number of SCT iterations.
 
 
 %% Load integrals from file
@@ -49,8 +49,9 @@ function [D] = densityMatrix(U)
     D = zeros(L/2, L/2);
     for r=1:L/2
         for s=1:L/2
+            D(s,r) = 0;
             for j=1:N/2
-                D(s,r) = D(s,r) + 2 * U(s,j) * conj(U(r,j));
+                D(s,r) = D(s,r) + 2.0 * U(s,j) * conj(U(r,j));
             end
         end
     end
@@ -64,17 +65,7 @@ function [F] = FockMatrix(D)
             F(q,p) = F(q,p) + delta(p,q)*e(p);
             for r=1:L/2
                 for s=1:L/2
-                    if q==1 && p==1 && r==1 && s==1
-                        F(q,p)
-                    end
-                    
                     F(q,p) = F(q,p) + D(s,r) * qrps(q,r,p,s);
-                    
-                    if q==1 && p==1 && r==1 && s==1
-                        F(q,p)
-                        qrps_ = qrps(q,r,p,s)
-                        
-                    end
                 end
             end
         end
@@ -116,32 +107,41 @@ end
 U = eye(L/2,L/2);
 
 % Vector containing the progression of HF-energy during the SCF iterations.
-E_SCF = zeros(maxIterations,1);
+E_SCF  = zeros(maxIterations,1);
+deltak = zeros(maxIterations,1);
 
 % Plot the progress live.
 figure(1);
-h = plot(nan, nan, 'r-o');
+subplot(2,1,2);
+h2 = semilogy(nan, nan, 'r-o');
+subplot(2,1,1);
+h1 = plot(nan, nan, 'r-o');
+oldEpsilon = 1;
 
 for iteration=1:maxIterations
     % Compute D and F, and check that F is hermitian.
     D = densityMatrix(U);
     F = FockMatrix(D);
     H = checkHermitian(F);
+    
     % Solve the linearized problem.
     [U, epsilon] = eig(F);
-    break;
     
     % Sort the eigenvalues and U.
-    [e, I]  = sort(diag(epsilon), 'descend');
+    [e, I]  = sort(diag(epsilon), 'ascend');
     epsilon = epsilon(I,I);
     U       = U(:,I);
     
     % Store the current value of the energy.
-    E_SCF(iteration) = restrictedHartreeFockEnergy(epsilon, U, D);
+    E_SCF(iteration)  = restrictedHartreeFockEnergy(epsilon, U, D);
+    deltak(iteration) = max(abs(diag(epsilon)-diag(oldEpsilon)));
     
     % Update the plot.
-    set(h, 'XData', linspace(1,iteration,iteration));
-    set(h, 'YData', E_SCF(1:iteration));
+    set(h1, 'XData', linspace(1,iteration,iteration));
+    set(h1, 'YData', E_SCF(1:iteration));
+    
+    set(h2, 'XData', linspace(1,iteration,iteration));
+    set(h2, 'YData', deltak(1:iteration));
     drawnow;
     
     % Print info to terminal.
@@ -150,16 +150,13 @@ for iteration=1:maxIterations
     else
         Hstr = 'No';
     end
-    fprintf('Iteration: %3d  E = %-11.7f F^H==F ?: %s\n',...
+    fprintf('Iteration: %3d  E = %-11.7f F^H==F ?: %s  delta_k = %-11.7g\n',...
             iteration, ...
             E_SCF(iteration), ...
-            Hstr);
+            Hstr,...
+            deltak(iteration));
+    oldEpsilon = epsilon;
 end
+close all
 
-
-
-assignin('base', 'A', A);
-assignin('base', 'E_ref', E_ref);
-assignin('base', 'H', H);
-assignin('base', 'E_CIS', E_CIS);
 end

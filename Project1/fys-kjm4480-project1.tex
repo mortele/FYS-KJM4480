@@ -734,7 +734,15 @@ E_\text{RHF} &= 2\sum_{p=1}^6 \sum_{i=1}^{N/2} U^*_{pi}({\psi}_p | \hat{h} | {\p
   discuss both cases.
 \end{itemize}
 \end{exframe}
-A {\sc Matlab} script which performs these calculations can be found at \url{https://github.com/mortele/FYS-KJM4480/tree/master/Project1}.
+A {\sc Matlab} script which performs these calculations can be found at \url{https://github.com/mortele/FYS-KJM4480/tree/master/Project1}. The convergence for $N=2$ is plotted in \fig{1}, and we note that a linear behaviour in a semi-log plot means the convergence exibits a power law behaviour. The analogous plot for the $N=6$ is ommitted, since it looks basically the same as \fig{1}.
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{convergence1.png}
+\caption{Convergence of the restricted Hartree-Fock energy for $N=2$. \label{fig:1}}
+\end{figure}
+
+The restricted Hartree-Fock energies appear to converge to $E_\text{RHF}^{(2)}=3.1627$ and $E_\text{RHF}^{(6)}=21.5932$, which is close to the CIS energies found earlier, $E_\text{CIS}^{(2)}=3.1570$ and $E_\text{CIS}^{(6)}=21.6168$. We note that the configuration interaction singles approach appears to have worked better than the restricted Hartree-Fock approach for the $N=2$ case, but for the $N=6$ case the opposite is true.
+
 
 \end{document}
 
