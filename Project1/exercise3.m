@@ -8,7 +8,7 @@ format short;
 %% Parameters
 N               = 2;  % Number of particles.
 L               = 12; % Number of basis functions. 
-maxIterations   = 5; % Maximum number of SCT iterations.
+maxIterations   = 30; % Maximum number of SCT iterations.
 
 
 %% Load integrals from file
@@ -78,11 +78,11 @@ function [E_RHF] = restrictedHartreeFockEnergy(epsilon, U, D)
     E_RHF = 0;
     for i=1:N/2
         E_RHF = E_RHF + 2 * e(i);
-        for p=1:N/2
-            for q=1:N/2
+        for q=1:N/2
+            for p=1:N/2
                 srSum = 0;
-                for s=1:N/2
-                    for r=1:N/2
+                for r=1:N/2
+                    for s=1:N/2
                         srSum = srSum + D(s,r)*qrps(q,r,p,s);
                     end
                 end
@@ -150,13 +150,14 @@ for iteration=1:maxIterations
     else
         Hstr = 'No';
     end
-    fprintf('Iteration: %3d  E = %-11.7f F^H==F ?: %s  delta_k = %-11.7g\n',...
+    fprintf('Iteration: %2d  E = %-11.7f  F^H==F? %s  delta_k = %-11.7g\n',...
             iteration, ...
             E_SCF(iteration), ...
             Hstr,...
             deltak(iteration));
     oldEpsilon = epsilon;
+    if abs(deltak(iteration)) < eps 
+        break;
+    end
 end
-close all
-
 end
