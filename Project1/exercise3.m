@@ -2,7 +2,7 @@ function [ ] = exercise3()
 close all;
 clear variables;
 clc;
-format long;
+format short;
 
 
 %% Parameters
@@ -29,13 +29,7 @@ delta = @(i,j) i==j;
 
 % Values of the single-particle part of the Hamiltonian, as a function of
 % the spatial index, i.
-e = @(i) 1*(i==1) + 2*(i>=2 | i<=3) + 3*(i>=4 & i<=6);
-
-% Spin values of the spin-orbitals labeled by the index i.
-spin = @(i) -1 + (mod(i,2)~=0)*2;
-
-% w-integral value of the mapped states.
-wm = @(p,q,r,s) w(mapState(p), mapState(q), mapState(r), mapState(s));
+e = @(i) 1*(i==1) + 2*(i>=2 & i<=3) + 3*(i>=4 & i<=6);
 
 % Computes [qr|ps].
 function [W] = qrps(q,r,p,s)
@@ -56,7 +50,7 @@ function [D] = densityMatrix(U)
     for r=1:L/2
         for s=1:L/2
             for j=1:N/2
-                D(s,r) = D(s,r) + 2 * U(s,j) * U(r,j)';
+                D(s,r) = D(s,r) + 2 * U(s,j) * conj(U(r,j));
             end
         end
     end
@@ -67,9 +61,20 @@ function [F] = FockMatrix(D)
     F = zeros(L/2,L/2);
     for q=1:L/2
         for p=1:L/2
+            F(q,p) = F(q,p) + delta(p,q)*e(p);
             for r=1:L/2
                 for s=1:L/2
+                    if q==1 && p==1 && r==1 && s==1
+                        F(q,p)
+                    end
+                    
                     F(q,p) = F(q,p) + D(s,r) * qrps(q,r,p,s);
+                    
+                    if q==1 && p==1 && r==1 && s==1
+                        F(q,p)
+                        qrps_ = qrps(q,r,p,s)
+                        
+                    end
                 end
             end
         end
@@ -90,7 +95,7 @@ function [E_RHF] = restrictedHartreeFockEnergy(epsilon, U, D)
                         srSum = srSum + D(s,r)*qrps(q,r,p,s);
                     end
                 end
-                E_RHF = E_RHF - U(q,i)' * srSum * U(p,i);
+                E_RHF = E_RHF - conj(U(q,i)) * srSum * U(p,i);
             end
         end
     end
@@ -118,10 +123,20 @@ figure(1);
 h = plot(nan, nan, 'r-o');
 
 for iteration=1:maxIterations
+    % Compute D and F, and check that F is hermitian.
     D = densityMatrix(U);
     F = FockMatrix(D);
     H = checkHermitian(F);
+    % Solve the linearized problem.
     [U, epsilon] = eig(F);
+    break;
+    
+    % Sort the eigenvalues and U.
+    [e, I]  = sort(diag(epsilon), 'descend');
+    epsilon = epsilon(I,I);
+    U       = U(:,I);
+    
+    % Store the current value of the energy.
     E_SCF(iteration) = restrictedHartreeFockEnergy(epsilon, U, D);
     
     % Update the plot.
@@ -135,7 +150,7 @@ for iteration=1:maxIterations
     else
         Hstr = 'No';
     end
-    fprintf('Iteration: %3d  E = %-11.7f F-F^H=0: %s\n',...
+    fprintf('Iteration: %3d  E = %-11.7f F^H==F ?: %s\n',...
             iteration, ...
             E_SCF(iteration), ...
             Hstr);
@@ -143,7 +158,8 @@ end
 
 
 
-
-
-
+assignin('base', 'A', A);
+assignin('base', 'E_ref', E_ref);
+assignin('base', 'H', H);
+assignin('base', 'E_CIS', E_CIS);
 end

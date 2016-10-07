@@ -6,8 +6,7 @@ format;
 
 
 %% Parameters
-N = 2
-;      % Number of particles.
+N = 2;      % Number of particles.
 
 
 %% Load integrals from file

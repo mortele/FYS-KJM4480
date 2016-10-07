@@ -29,7 +29,9 @@
 \usepackage{multicol}                        % Multiple text columns.
 \usepackage{capt-of}                         % Caption things which are not floats.
 \usepackage[url=false]{biblatex}             % Citations (made easy).
-\usepackage{simplewick}
+\usepackage{simplewick}                      % Contractions using Wick's theorem for QFT.
+\usepackage{booktabs}                        % Tables.
+\usepackage{bbold}
 
 % Differentials -------------------------------------------------------------- %
 \newcommand{\dt}{\,\mathrm{d}t}
@@ -331,9 +333,34 @@ where we have used the general form of a two-body operator, $\hat{A}$ under seco
 \end{align}
 where we once again have used the fact that operating on $\slater$ with any $c_\mu$ with $\mu\not=P_i$ yields zero. Hence the index $i$ denotes only the occupied spin-orbitals in the Slater determinant. Please note that $\varepsilon_i$ is shorthand notation for $\varepsilon_{n_i m_i}$. 
 
-We know the form of the single-particle energies, $\varepsilon_{n m}=(2n+|m|+1)/2$, and thus it is easy to see that the lowest energy state for the non-interacting two-electron problem is obtained by placing both electrons in the $n=m=0$ orbital. In the rest of the project we will use the notation found in \tab{1} (REMEMBER TO FIX THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!) to denote the spin-orbitals. Using this notation, we are placing the elctrons in the spin-orbitals $\u{1}$ and $\d{1}$, i.e. $|\Phi\rangle = |\u{1}\d{1}\rangle$. This state has energy $E_0^{(2)}=1$, since $\hat{H}_0|\u{1}\d{1}\rangle=1|\u{1}\d{1}\rangle$. 
 
-The fermi level is defined as the single particle energy of the highest energy occupied spin-orbital in the Slater determinant. In our case, $E^{(2)}_f=1/2$. We note that any spin-orbital with energy at or below the fermi level is occupied, while corresponding spin-orbitals with energies above the fermi level are unoccupied.
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\begin{table*}\centering
+%\ra{1.0}
+\begin{tabular}{@{}llllllllll@{}}\toprule
+Spin-         & Spin-orbital        & spatial         & Radial quantum    & Azimutal quantum    & Spin                       \\
+orbital       & index               & index, $p(n,m)$ & number, $n$       & number, $m$         & projection, $\alpha$       \\
+\midrule
+$\u{1}$       & 1                   & 1               & 0                 & $\phantom{-}0$      & $\phantom{-}\hbar/2$                        \\
+$\d{1}$       & 2                   & 1               & 0                 & $\phantom{-}0$      & $-\hbar/2$                        \\
+$\u{2}$       & 3                   & 2               & 0                 & $-1$                & $\phantom{-}\hbar/2$                        \\
+$\d{2}$       & 4                   & 2               & 0                 & $-1$                & $-\hbar/2$                        \\
+$\u{3}$       & 5                   & 3               & 0                 & $+1$                & $\phantom{-}\hbar/2$                        \\
+$\d{3}$       & 6                   & 3               & 0                 & $+1$                & $-\hbar/2$                        \\
+$\u{4}$       & 7                   & 4               & 0                 & $-2$                & $\phantom{-}\hbar/2$                        \\
+$\d{4}$       & 8                   & 4               & 0                 & $-2$                & $-\hbar/2$                        \\
+$\u{5}$       & 9                   & 5               & 1                 & $\phantom{-}0$      & $\phantom{-}\hbar/2$                        \\
+$\d{5}$       & 10                  & 5               & 1                 & $\phantom{-}0$      & $-\hbar/2$                        \\
+$\u{6}$       & 11                  & 6               & 0                 & $+2$                & $\phantom{-}\hbar/2$                        \\
+$\d{6}$       & 12                  & 6               & 0                 & $+2$                & $-\hbar/2$                        \\
+\bottomrule
+\end{tabular}
+\caption{Notation used to denote the spin-orbitals used throughout the project report.\label{tab:1}}
+\end{table*}
+
+We know the form of the single-particle energies, $\varepsilon_{n m}=(2n+|m|+1)/2$, and thus it is easy to see that the lowest energy state for the non-interacting two-electron problem is obtained by placing both electrons in the $n=m=0$ orbital. In the rest of the project we will use the notation found in \tab{1} to denote the spin-orbitals. Using this notation, we are placing the elctrons in the spin-orbitals $\u{1}$ and $\d{1}$, i.e. $|\Phi\rangle = |\u{1}\d{1}\rangle$. This state has energy $E_0^{(2)}=2$, since $\hat{H}_0|\u{1}\d{1}\rangle=2|\u{1}\d{1}\rangle$. 
+
+The fermi level is defined as the single particle energy of the highest energy occupied spin-orbital in the Slater determinant. In our case, $E^{(2)}_f=1$. We note that any spin-orbital with energy at or below the fermi level is occupied, while corresponding spin-orbitals with energies above the fermi level are unoccupied.
 
 \begin{exframe}
 \begin{itemize}
@@ -361,7 +388,6 @@ $|\Phi^{\u{5}\d{5}}_{\u{1}\d{1}}\rangle$, $|\Phi^{\u{4}\d{6}}_{\u{1}\d{1}}\rangl
 
 We note here that e.g. $|\Phi^{\u{2}\d{3}}_{\u{1}\d{1}}\rangle$ and $|\Phi^{\u{2}\d{3}}_{\d{1}\u{1}}\rangle$ represent the same state, since they differ by at most a minus sign because the $b$-operators for different spin-orbitals all anti-commute.
 
-\newpage
 \begin{exframe}
 \begin{itemize}
   \item[2b)] Write down the Hamiltonian, $\hat{H}$, on second quantized form. Using Wick's theorem relative to the true vacuum, $|-\rangle$, compute the expectation value $E_\text{ref}=\langle \Phi |\hat{H} | \Phi\rangle$ and obtain a numerical value by using integral table found in \texttt{coulomb.dat}. Explain why this expectation value can be considered an approximation to the exact ground-state energy. 
@@ -490,8 +516,225 @@ Finally, we consider the last term of \eq{6},
 \end{align}
 where only the sum terms with two creation and two annihilation operators (one $i$ and one $a$ index each) give non-zero contributions. And once again, we have only one non-vanishing contraction for each term because of delta functions across $i$ and $a$ indices are always zero. 
 
-We have now developed all the tools we need in order to set up the $3\times3$ CIS matrix and diagonalize it.
+We have now developed all the tools we need in order to set up the $3\times3$ CIS matrix and diagonalize it. This is done in the same {\sc Matlab} script as the one solving exercise 2b). The resulting matrix takes the form
+\begin{align}
+H_\text{CIS}^{(2)}=\bmat{ccc}{\langle \Phi | \hat{H} | \Phi \rangle & \langle \Phi | \hat{H} | \Phi^{\u{5}}_{\u{1}} \rangle & \langle \Phi | \hat{H} | \Phi^{\d{5}}_{\d{1}} \rangle \\
+\langle \Phi^{\u{5}}_{\u{1}} | \hat{H} | \Phi \rangle & \langle \Phi^{\u{5}}_{\u{1}} | \hat{H} | \Phi^{\u{5}}_{\u{1}} \rangle & \langle \Phi^{\u{5}}_{\u{1}} | \hat{H} | \Phi^{\d{5}}_{\d{1}} \rangle \\
+\langle \Phi^{\d{5}}_{\d{1}} | \hat{H} | \Phi \rangle & \langle \Phi^{\d{5}}_{\d{1}} | \hat{H} | \Phi^{\u{5}}_{\u{1}} \rangle & \langle \Phi^{\d{5}}_{\d{1}} | \hat{H} | \Phi^{\d{5}}_{\d{1}} \rangle} = \bmat{ccc}{3.2533 & 0.3133 & 0.3133 \\
+0.3133 & 5.0183 & 0.1762\\
+0.3133 & 0.1762 & 5.0183},
+\end{align}
+with eigenvalues $3.1570$, $4.8421$, and $5.2909$. We note that the new approximation to the ground state energy, $E_\text{CIS}^{(2)}=3.1570$ is better than the reference, $E_\text{ref}^{(2)}=3.2533$, but still not great. However, considering the limitations of the current method (configuration interactions using only singles, and only considering states of $S_z=M=0$), I guess we should be happy.
 
+\begin{exframe}
+\begin{itemize}
+  \item[2d)] We repeat exercises b) and c) but now for the six electron quantum dot. De ne the reference wavefunction $|\Phi\rangle$ and limit yourself again to one-particle-one-hole excitations.
+
+  Compute the reference energy $E_\text{ref}^{(6)}=\langle \Phi|\hat{H}|\Phi\rangle$, inserting the numerical values for the $\hat w$ matrix elements.  Thereafter you will need to set up the appropriate Hamiltonian matrix which involves also one-particle-one-hole excitations, also using numerical values for matrix elements. Diagonalize this matrix and compare your eigenvalues with $E_\text{ref}^{(6)}$ and comment the result. The best numerical result for our Hamiltonian is obtained with Diffusion Monte Carlo calculations, and for $\omega=1$ the energy for the ground state is $E_0=20.1597$ atomic units.
+\end{itemize}
+\end{exframe}
+For six electrons, the reference Slater determinant is $|\Phi\rangle = |\u{1}\d{1}\u{2}\d{2}\u{3}\d{3}\rangle$, i.e. the one with spatial orbitals $(n=0,m=0)$, $(n=0,m=-1)$, and $(n=0,m=1)$ occupied. We note that the energy of this Slater determinant under the non-interacting Hamiltonian is $E_0^{(6)}=10$, and the fermi level is now at $E_f^{(6)}=2$ (the energy of the spin-orbitals $\u{2}$, $\d{2}$, $\u{3}$, and $\d{3}$).
+
+In the same was as for the two-electron case, we can calculate the reference energy using our algorithm (the script should be general enough to handle both cases). The result, $E_\text{ref}^{(6)}=22.2198$, is not great. We note that the relative error in this approximation of the ground state energy (taking $E_0$ to be the \emph{true} ground state energy now) is $10.2\%$. In comparison, the relative error in the approximation in the two-electron case was $8.4\%$. 
+
+For the six-electron case, we still demand $S_z=M=0$ which means we are still restricted to the exact same allowed one-particle-one-hole excitations, namely $\u{1}\rightarrow \u{5}$ and $\d{1}\rightarrow\d{5}$. Because of this, extending the CIS part of the script to the six-electron case requires next to no extra work. Setting up the matrix, and diagonalizing it yields
+\begin{align}
+H_\text{CIS}^{(6)} = \bmat{ccc}{22.2198    & 0.7833    & 0.7833 \\
+0.7833  & 23.4757   & 0.1762 \\
+0.7833  &  0.1762  & 23.4757},
+\end{align}
+and $E_\text{CIS}^{(6)}=21.6168$, which is an improvement over the reference, but as in the two-electron case, still not great. However, the same restrictions as before apply here also, and we have done (just about) no extra work to make it happen, so I guess we should be happy here also. Before we turn to the next exercise we note that the relative errors of the CIS energy is $5.2\%$ and $7.2\%$ for the two-, and six-electron cases respectively.
+
+\subsection*{Exercise 3}
+Having treated the parabolic quantum dot with con guration-interaction, we now turn to a restricted Hartree–Fock (RHF) treatment.
+\begin{exframe}
+\begin{itemize}
+  \item[3a)] Define the RHF wavefunction $|\Phi_\text{RHF}\rangle$ for an even number of particles. Use the notation $\tilde{\psi}_I({\bf r})$, for $I=1,2,3,\dots,N/2$, for the unknown spatial orbitals to be found. 
+
+  Compute, in terms of the unknown orbitals, 
+  \begin{align}
+  E_\text{RHF} = \langle \Phi_\text{RHF} | \hat{H} | \Phi_\text{RHF}\rangle,
+  \end{align}
+  and compare with general HF.
+\end{itemize}
+\end{exframe}
+The restricted Hartree-Fock wavefunction is a single Slater ansatz for the \emph{true} wavefunction, where each spatial orbital is occupied by exactly two electrons. The wavefunction thus takes the form
+\begin{align}
+|\Phi_\text{RHF}\rangle &= |\tilde{\psi}_{1,-1}\tilde{\psi}_{1,+1} \tilde{\psi}_{2,-1}\tilde{\psi}_{2,+1}\dots \tilde{\psi}_{N/2,-1}\tilde{\psi}_{N/2,+1} \rangle,
+\end{align}
+where the subscripts, $(p, \alpha)$ denote the spatial orbital index $p$, and the spin projection, $\alpha$, of the spin-orbitals. We note that all spatial orbitals are "paired," with two occupying electrons, yielding a system with pair-wise equal spatial orbitals.
+
+Applying the Hamiltoninan to this state, we find
+\begin{align}
+\langle \Phi_\text{RHF} | \hat{H} | \Phi_\text{RHF} \rangle &= \sum_{\alpha=\pm1} \sum_{i=1}^{N/2} \langle \tilde{\psi}_{i,\alpha} | \hat{h} | \tilde{\psi}_{i,\alpha}\rangle + \sum_{\alpha=\pm1}\sum_{i=1}^{N/2}\sum_{\beta=\pm1}\sum_{j=1}^{N/2} \langle \tilde{\psi}_{i,\alpha} \tilde{\psi}_{j,\beta} | \hat{w} | \tilde{\psi}_{i,\alpha} \tilde{\psi}_{j,\beta} - \tilde{\psi}_{j,\beta}\tilde{\psi}_{i,\alpha}\rangle \nn\\
+%
+&= 2\sum_{i=1}^{N/2} (\tilde{\psi}_i | \hat{h} | \tilde{\psi}_i) + 2\sum_{i=1}^{N/2}\sum_{j=1}^{N/2} (\tilde{\psi}_i \tilde{\psi}_j | \hat{w} | \tilde{\psi}_i \tilde{\psi}_j) -  \sum_{i=1}^{N/2}\sum_{j=1}^{N/2}(\tilde{\psi}_i \tilde{\psi}_j | \hat{w} | \tilde{\psi}_j\tilde{\psi}_i),\label{eq:7}
+\end{align}
+where we denote by $(\cdot|\cdot)$ the spatial matrix element after the spin-part of the the wavefunction has been factorized out.
+
+For canonical Hartree-Fock, we may find $\langle \Phi | \hat{H} | \Phi\rangle$ by left-multiplying the Hatree-Fock equation, $\hat{f}(\phi_1,\phi_2,\dots,\phi_N)|\phi_i\rangle = \varepsilon_i |\phi_i\rangle$, by $\sum_{i=1}^N\langle \phi_i|$. Doing this yields 
+\begin{align}
+E_\text{HF} &= \sum_{i=1}^N\langle \phi_i|\hat{h}+\hat{\nu}^\text{direct} - \hat{\nu}^\text{exchange}|\phi_i\rangle \nn\\
+&= \sum_{i=1}^N\langle \phi_i|\hat{h}|\phi_i\rangle + \sum_{i=1}^N\sum_{j=1}^N\langle \phi_i\phi_j|\hat{w}|\phi_i\phi_j\rangle - \sum_{i=1}^N\sum_{j=1}^N\langle \phi_i\phi_j|\hat{w}|\phi_j\phi_i\rangle. \label{eq:8}
+\end{align}
+Eqs. (\ref{eq:7}) and (\ref{eq:8}) look similar, but have a few crucial differences, first and foremost of which is the fact that in the former we have factored out the spin parts of the wavefunction and we have only half as many orbitals (canonical Hartree-Fock spin-orbitals are not required to have pair-wise equal spatial parts).
+
+\begin{exframe}
+\begin{itemize}
+  \item[3b)] In the remainder, we limit ourselves to $N=2$ and $N=6$. We expand the RHF spatial orbitals in the harmonic oscillator functions, $\psi_p({\bf r})$ for $p=1,2,\dots,6$. Define a $6\times6$ matrix $U$ and write
+  \begin{align}
+  \tilde{\psi}_p({\bf r})U_{pq}. \label{eq:9}
+  \end{align}
+  Explain why the matrix $U$ must be unitary. What part of $U$ corresponds to the occupied RHF orbitals? What part corresponds to the virtual RHF orbitals?
+\end{itemize}
+\end{exframe}
+The matrix $U$ is not unitary in general, but it will be if the basis used is orthonormal. In general, $U^\dagger S U = \mathbb{1}$, with $S$ being the overlap matrix and $\mathbb{1}$ being the identity matrix. Since our basis is orthonormal, we can show that $U$ must be unitary. Let us take 
+\begin{align}
+|\tilde{\psi}_q\rangle = \sum_{p=1}^6 |{\psi}_q\rangle U_{pq},
+\end{align}
+and left-multiply by the Hermitian conjugate, giving
+\begin{align}
+\langle \tilde{\psi}_{q'}|\tilde{\psi}_q\rangle &= \sum_{p=1}^6 \langle\tilde{\psi}_{q}|{\psi}_p\rangle U_{pq} \nn\\
+\delta_{q'q} &=\sum_{p'=1}^6\sum_{p=1}^6 U^*_{q'p'}\underbrace{\langle\psi_{p'}|{\psi}_p\rangle}_{\delta_{p'p}} U_{pq} \nn\\
+ &= \sum_{p'=1}^6\sum_{p=1}^6 \delta_{p'p} U^*_{q'p'} U_{pq} \nn\\
+ &= \sum_{p=1}^6 U^*_{q'p}U_{pq} = U^\dagger U = \mathbb{1}.
+\end{align}
+
+The matrix $U$ contains the coefficients of the unknown orbitals, $\tilde \psi_q$, expanded in the basis of the known $\psi_p$. Specifically, column $q$ contains the coefficients for the unkown $\tilde\psi_q$. The first $N$ orbitals are usually called occupied, while the remaining are called virtual. For the two-electron case, we note that the first column of $U$ correspond to the occupied orbitals, while colums from 2 up to and including 6 correspond to the virtual orbitals.
+
+\begin{exframe}
+\begin{itemize}
+  \item[3c)] Using your result in 3a) and the definition in \eq{9}, show that the RHF energy can be written 
+  \begin{align}
+  E_\text{RHF} = 2\sum_p\sum_q\sum_i U^*_{qi} (\psi_q|\hat{h}|\psi_p) + 2\sum_p\sum_q\sum_i U^*_{pi} \left(\sum_r\sum_s D_{sr} [qr|ps]\right)U_{pi}. \label{eq:10}
+  \end{align}
+  The sums over $i$ and $j$ go from $1$ to $N/2$, and we have defined 
+  \begin{align}
+  [qr|ps] = (\psi_q\psi_r|\hat{w}|\psi_p\psi_s) - \frac{1}{2}(\psi_q\psi_r|\hat{w}|\psi_s\psi_p). 
+  \end{align}
+  We have also defined the reduced density matrix,
+  \begin{align}
+  D_{sr} = 2\sum_i U_{si}U^*_{ri}.
+  \end{align}
+\end{itemize}
+\end{exframe}
+Taking the energy expression we found in 3a), \eq{7}, and expressing it in terms of the harmonic oscillator basis functions, we find for the first term 
+\begin{align}
+E_\text{RHF}^{(\text{first term})} &= 2\sum_{i=1}^{N/2} (\tilde{\psi}_i | \hat{h} | \tilde{\psi}_i) \nn\\
+&= 2\sum_{p=1}^6 \sum_{i=1}^{N/2} U^*_{pi}({\psi}_p | \hat{h} | {\psi}_p)U_{pi}.
+\end{align}
+If we consider the second and third terms together, we find
+\begin{align}
+E_\text{RHF}^{(\text{second+third terms})} &= 2\sum_{i=1}^{N/2}\sum_{j=1}^{N/2} (\tilde{\psi}_i \tilde{\psi}_j | \hat{w} | \tilde{\psi}_i \tilde{\psi}_j) -  \sum_{i=1}^{N/2}\sum_{j=1}^{N/2}(\tilde{\psi}_i \tilde{\psi}_j | \hat{w} | \tilde{\psi}_j\tilde{\psi}_i) \nn\\
+%
+&= 2\sum_{pqrs}\sum_{i=1}^{N/2}\sum_{j=1}^{N/2}U^*_{qi} U^*_{rj}({\psi}_q {\psi}_r | \hat{w} | {\psi}_p {\psi}_s)U_{pi}U_{sj}   \nn\\
+& \ \ \ \ \ \ \ \ \ \ \ -\sum_{pqrs}\sum_{i=1}^{N/2}\sum_{j=1}^{N/2}U^*_{qi} U^*_{rj}({\psi}_q {\psi}_r | \hat{w} | {\psi}_s{\psi}_p)U_{sj}U_{pi} \nn\\
+&= 2\sum_{pqrs}\sum_{i=1}^{N/2}\sum_{j=1}^{N/2}\bigg(U^*_{qi} U^*_{rj}({\psi}_q {\psi}_r | \hat{w} | {\psi}_p {\psi}_s)U_{pi}U_{sj}   \nn\\
+& \ \ \ \ \ \ \ \ \ \ \ -\frac{1}{2} U^*_{qi} U^*_{rj}({\psi}_q {\psi}_r | \hat{w} | {\psi}_s{\psi}_p)U_{pi}U_{sj}\bigg) \nn\\
+&= \sum_{pq}\sum_{i=1}^{N/2} U^*_{qi} \left(2\sum_{rs}\sum_{j=1}^{N/2} U_{sj}U^*_{rj} [qr|ps]\right) U_{pi} \nn\\
+&= \sum_{pq}\sum_{i=1}^{N/2} U^*_{qi} \left(\sum_{rs}D_{sr} [qr|ps]\right) U_{pi}, \label{eq:11}
+\end{align}
+where we have used that a matrix written in terms of it's indices commute as a complex number (i.e. trivially). Combining the first term with these two yields the result shown in \eq{10}.
+
+\eq{11} may alternatively be written in terms of the direct and exchange energies, as
+\begin{align}
+\sum_{pq}\sum_{i=1}^{N/2} U^*_{qi} \left(\sum_{rs}D_{sr} [qr|ps]\right) U_{pi} &= \sum_{pq}\sum_{i=1}^{N/2} U^*_{qi} \left(\sum_{rs}D_{sr} \psi_q \left[\hat{\nu}^\text{direct}-\frac{1}{2}\hat{\nu}^\text{exchange} \right] \psi_p \right) U_{pi},
+\end{align}
+with $\hat{\nu}^\text{direct}$ being defined by $\hat{\nu}^\text{direct} |\psi\rangle = \sum_j \langle \ \cdot \ \phi_j | \hat{w}|\psi \phi_j\rangle$ and the exchange potential, $\hat{\nu}^\text{exchange}$, being defined by $\hat{\nu}^\text{exchange} |\psi\rangle = \sum_j \langle \ \cdot \ \phi_j | \hat{w}| \phi_j\psi\rangle$. These two potentials arise from the minimization of the energy under the orthonormality constraints employed in the Hartree-Fock method. The direct potential can be interpreted as an average of the two-body operator $\hat{w}$ over the coordinates of the other particles, weighted by the "particle density," $\rho({\bf r})=\sum_i|\phi({\bf r})|^2$. This results in a "mean-field potential," in that the interactions between the particles are only considered as an interacting with an average density.
+
+The exchange potential, on the other hand, is not local. I.e. in a point ${\bf r}'$, it depends on the values of the wavefunctions of the other particles are every other point. 
+
+The major difference between the restricted and the canonical Hartree-Fock at this point is that the exchange potential is half that of the canonical case. This is because the $\langle\psi_i\psi_j|\hat{w}|\psi_j\psi_i\rangle$ obtains a $\delta_{\alpha_i\alpha_j}$ when the spin is factored out in the RHF approach, which halves the number of terms which contribute.
+
+\begin{exframe}
+\begin{itemize}
+  \item[3d)] The RHF equations in the given basis can be written 
+  \begin{align}
+  F(D)U=U\varepsilon, \ \ \ \ \ \ \ \ \ \text{(Roothan-Hall equation)}
+  \end{align}
+  where $F(D)$ is the Fock matrix,
+  \begin{align}
+  F_{qp}(D) = (\psi_q|\hat{h}|\psi_p) + \sum_r\sum_s D_{sr} [qr|ps],
+  \end{align}
+  and where $\varepsilon=\text{diag}(\varepsilon_1,\varepsilon_2,\dots,\varepsilon_{L/2})$ is a diagonal matrix of eigenvalues.
+
+  Explain in what way the Roothan-Hall equation differs from an ordinary matrix eigenvalue problem.
+\end{itemize}
+\end{exframe}
+Ordinary eigenvalue problems, $A{\bf x}=\lambda {\bf x}$, can be written in terms of an eigenvector matrix, $V$ (where the columns are the eigenvectors of $A$), and a diagonal matrix of eigenvalues, $\Lambda=\text{diag}(\lambda_1, \lambda_2, \dots, \lambda_N)$,  as $AV=\Lambda V$. This problem can be solved directly for a given numerical $A\in\C^{N\times N}$ (by considering the characteristic polynomial if $N$ is small, or by a QR-algorithm if $N$ is large).
+
+The Roothan-Hall equations on the other hand, have an operator matrix, $F(D)$ which depends on it's eigenvectors through $D=D(U)$. Thus the problem really reads $F(U)U=U \varepsilon$, which is a non-linear problem in $U$. This is called a generalized eigenvalue equation. The way we will solve it is to perform so-called SCF iterations, linearizing the problem and solving for each iteration, hopefully yielding a solution which is closer to the \emph{true} solution.
+
+\begin{exframe}
+\begin{itemize}
+  \item[3e)] Show that the RHF energy can be written 
+  \begin{align}
+  E_\text{RHF} = 2\sum_i\varepsilon_i - \sum_i\sum_p\sum_q U_{qi}^*\left(\sum_s\sum_r D_{sr}[qr|ps] \right)U_{pi}.
+  \end{align}
+\end{itemize}
+\end{exframe}
+Left-multiplying the Roothan-Hall equation by $U^\dagger$, we find
+\begin{align}
+U^\dagger F(D)U &= U^\dagger U\varepsilon = \varepsilon.
+\end{align}
+Since the right hand side is diagonal, the product on the left hand side must also be diagonal. Let us now consider the diagonal elements of $U^\dagger F(D) U$,
+\begin{align}
+\varepsilon_{ii} = \varepsilon_i &= \sum_q\sum_p U^*_{iq}F_{qp}(D)U_{pi} \nn\\
+&= \sum_q\sum_p U^*_{iq}\left((\psi_q | \hat{h} | \psi_p) + \sum_r \sum_s D_{sr}[qr|ps] \right)U_{pi},
+\end{align}
+from which we may extract that
+\begin{align}
+\sum_i\sum_q\sum_p U^*_{qi}(\psi_q|\hat{h}|\psi_p)U_{pi} &= \sum_i \varepsilon_i - U^*_{qi}\sum_i\sum_r\sum_s D_{sr}[qr|ps] U_{pi}.
+\end{align}
+Inserting this back into the expression for the RHF energy, we find
+\begin{align}
+E_\text{RHF} &= 2\sum_{p=1}^6 \sum_{i=1}^{N/2} U^*_{pi}({\psi}_p | \hat{h} | {\psi}_p)U_{pi} + \sum_{pq}\sum_{i=1}^{N/2} U^*_{qi} \left(\sum_{rs}D_{sr} [qr|ps]\right) U_{pi} \nn\\
+&= 2\left(\sum_i \varepsilon_i - U^*_{qi}\sum_i\sum_r\sum_s D_{sr}[qr|ps] U_{pi} \right)+ \sum_{pq}\sum_{i=1}^{N/2} U^*_{qi} \left(\sum_{rs}D_{sr} [qr|ps]\right) U_{pi} \nn\\
+&= 2\sum_i\varepsilon_i - \sum_i\sum_p\sum_q U^*_{qi}\left( \sum_{sr} D_{sr}[qr|ps]\right) U_{pi}.
+\end{align}
+
+\begin{exframe}
+\begin{itemize}
+  \item[3f)] We are now going to solve the Roothan-Hall equation numerically. Use your favorite programming language and environment. Use comments to document your code and make it readable.
+
+  Write first a subroutine/function/module that, given a reduced
+  density matrix $D_0$, computes the corresponding Fock matrix
+  $F(D_0)$, and then diagonalizes it.
+
+  Thus, your subroutine should solve the standard eigenvalue problem
+  $F(D_0)U = U\varepsilon$ and return $U$ and the diagonal elements of
+  $\varepsilon$.
+
+  (A useful check on the sanity of your implementation is that $F$ is
+  Hermitian.)
+\end{itemize}
+\end{exframe}
+\begin{exframe}
+\begin{itemize}
+  \item[3g)] Write a program that performs SCF iterations,
+  \begin{equation}
+    F(U^{(k-1)}) U^{(k)} = U^{(k)}\epsilon^{(k)},
+  \end{equation}
+  with $U^{(0)}=I$, the identity matrix.
+
+  You will need approximately 15 iterations for convergence. Measure
+  the convergence via
+  \begin{equation}
+    \delta_k = \max_p\{|\varepsilon^{(k)}_p - \varepsilon^{(k-1)}_p|\}.
+  \end{equation}
+  Plot $\delta_k$ versus $k$, with $\delta_k$ on a log-axis.
+  
+  At each iteration $k=1,2,\cdots$, compute $E_\text{RHF}$. Discuss the
+  convergence properties.
+
+  Compare the converged RHF energy with the results obtained for CIS,
+  and with the numerically exact values listed elsewhere in this project.
+
+  Make sure your program handles both $N=2$ and $N=6$, and that you
+  discuss both cases.
+\end{itemize}
+\end{exframe}
+A {\sc Matlab} script which performs these calculations can be found at \url{https://github.com/mortele/FYS-KJM4480/tree/master/Project1}.
 
 \end{document}
 
