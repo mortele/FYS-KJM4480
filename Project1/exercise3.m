@@ -8,7 +8,7 @@ format short;
 %% Parameters
 N               = 2;  % Number of particles.
 L               = 12; % Number of basis functions. 
-maxIterations   = 30; % Maximum number of SCT iterations.
+maxIterations   = 20; % Maximum number of SCT iterations.
 
 
 %% Load integrals from file
@@ -56,13 +56,12 @@ function [D] = densityMatrix(U)
         end
     end
 end
-
+                    
 % Fock matrix.
 function [F] = FockMatrix(D)
-    F = zeros(L/2,L/2);
+    F = diag([1 2 2 3 3 3]');
     for q=1:L/2
         for p=1:L/2
-            F(q,p) = F(q,p) + delta(p,q)*e(p);
             for r=1:L/2
                 for s=1:L/2
                     F(q,p) = F(q,p) + D(s,r) * qrps(q,r,p,s);
@@ -76,20 +75,22 @@ end
 % matrix.
 function [E_RHF] = restrictedHartreeFockEnergy(epsilon, U, D)
     E_RHF = 0;
+    W = 0;
     for i=1:N/2
-        E_RHF = E_RHF + 2 * e(i);
-        for q=1:N/2
-            for p=1:N/2
+        E_RHF = E_RHF + 2 * epsilon(i,i);
+        for q=1:L/2
+            for p=1:L/2
                 srSum = 0;
-                for r=1:N/2
-                    for s=1:N/2
+                for r=1:L/2
+                    for s=1:L/2
                         srSum = srSum + D(s,r)*qrps(q,r,p,s);
                     end
                 end
-                E_RHF = E_RHF - conj(U(q,i)) * srSum * U(p,i);
+                W = W + conj(U(q,i)) * srSum * U(p,i);
             end
         end
     end
+    E_RHF = E_RHF - W;
 end    
 
 % Checks if a given matrix is Hermitian or not.
@@ -114,8 +115,11 @@ deltak = zeros(maxIterations,1);
 figure(1);
 subplot(2,1,2);
 h2 = semilogy(nan, nan, 'r-o');
+xlabel('Iteration', 'interpreter', 'latex','FontSize', 16);
+ylabel('$\delta_k$', 'interpreter', 'latex','FontSize', 16);
 subplot(2,1,1);
 h1 = plot(nan, nan, 'r-o');
+ylabel('$E_{RHF}$', 'interpreter', 'latex','FontSize', 16);
 oldEpsilon = 1;
 
 for iteration=1:maxIterations
@@ -125,7 +129,7 @@ for iteration=1:maxIterations
     H = checkHermitian(F);
     
     % Solve the linearized problem.
-    [U, epsilon] = eig(F);
+    [U, epsilon] = eig((F+F')/2);
     
     % Sort the eigenvalues and U.
     [e, I]  = sort(diag(epsilon), 'ascend');

@@ -422,7 +422,7 @@ There are $16$ terms in the quadruple sum, but only a few of them will survive t
  \end{align}
  where $i$ and $j$ are spin-orbital indices, while $i'$ and $j'$ are the spatial orbitals associated with the spin-orbitals $i$ and $j$, after the spin part has been dealt with. The notation $(ij|\hat{w}|kl)$ denotes the spatial integrals found in the \texttt{coulomb.dat} file. 
 
- Using Eqs. (\ref{eq:4}) and (\ref{eq:5}) we may calculate the energy, $E_\text{ref}=\langle \Phi| \hat{H} |\Phi\rangle$. A {\sc Matlab} script which performs this calculation can be found at \url{https://github.com/mortele/FYS-KJM4480/tree/master/Project1}. The resulting energy, $E_\text{ref}^{(2)}=3.2533$, can be considered an approximation to the ground state energy because $|\Phi\rangle$ is the ground state of the non-interacting problem. If electron interactions change the energy at all, then this will not be the \emph{true} ground state of the interacting problem, $|\Phi'\rangle$. In fact, the true ground state can probably not be expressed in terms of a single Slater determinant, but a linear combination of Slater determinants constructed from all the single particle eigenfunctions of the non-interacting, single particle problem.
+ Using Eqs. (\ref{eq:4}) and (\ref{eq:5}) we may calculate the energy, $E_\text{ref}=\langle \Phi| \hat{H} |\Phi\rangle$. A {\sc Matlab} script which performs this calculation can be found in the appendix. The resulting energy, $E_\text{ref}^{(2)}=3.2533$, can be considered an approximation to the ground state energy because $|\Phi\rangle$ is the ground state of the non-interacting problem. If electron interactions change the energy at all, then this will not be the \emph{true} ground state of the interacting problem, $|\Phi'\rangle$. In fact, the true ground state can probably not be expressed in terms of a single Slater determinant, but a linear combination of Slater determinants constructed from all the single particle eigenfunctions of the non-interacting, single particle problem.
 
  Due to the variational principle, we know we are over-shooting the true ground state energy, i.e. $E_\text{ref}^{(2)}\ge E_0^{(2)}$.
 % \contraction{skip first}{first term}{between first/second term}{second term}
@@ -734,7 +734,7 @@ E_\text{RHF} &= 2\sum_{p=1}^6 \sum_{i=1}^{N/2} U^*_{pi}({\psi}_p | \hat{h} | {\p
   discuss both cases.
 \end{itemize}
 \end{exframe}
-A {\sc Matlab} script which performs these calculations can be found at \url{https://github.com/mortele/FYS-KJM4480/tree/master/Project1}. The convergence for $N=2$ is plotted in \fig{1}, and we note that a linear behaviour in a semi-log plot means the convergence exibits a power law behaviour. The analogous plot for the $N=6$ is ommitted, since it looks basically the same as \fig{1}.
+A {\sc Matlab} script which performs these calculations can be found the appendix. The convergence for $N=2$ is plotted in \fig{1}, and we note that a linear behaviour in a semi-log plot means the convergence exibits a power law behaviour. The analogous plot for the $N=6$ is ommitted, since it looks basically the same as \fig{1}.
 \begin{figure}[h]
 \centering
 \includegraphics[width=10cm]{convergence1.png}
@@ -743,7 +743,14 @@ A {\sc Matlab} script which performs these calculations can be found at \url{htt
 
 The restricted Hartree-Fock energies appear to converge to $E_\text{RHF}^{(2)}=3.1627$ and $E_\text{RHF}^{(6)}=21.5932$, which is close to the CIS energies found earlier, $E_\text{CIS}^{(2)}=3.1570$ and $E_\text{CIS}^{(6)}=21.6168$. We note that the configuration interaction singles approach appears to have worked better than the restricted Hartree-Fock approach for the $N=2$ case, but for the $N=6$ case the opposite is true.
 
+\newpage
+\subsection*{Appendix}
+\subsubsection*{A1: Code for exercise 2}
+\lstinputlisting[language=Matlab]{exercise2.m}
 
+\newpage
+\subsubsection*{A2: Code for exercise 3}
+\lstinputlisting[language=Matlab]{exercise3.m}
 \end{document}
 
 
