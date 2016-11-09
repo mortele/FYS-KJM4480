@@ -32,6 +32,7 @@
 \usepackage{simplewick}                      % Contractions using Wick's theorem for QFT.
 \usepackage{booktabs}                        % Tables.
 \usepackage{bbold}
+\usepackage{tikz}
 
 % Differentials -------------------------------------------------------------- %
 \newcommand{\dt}{\,\mathrm{d}t}
@@ -316,6 +317,43 @@ We can transform the Hamiltonian to dimensionless form by introducing a suitable
   Set up the $M=S_z=0$ ground state of the non-interacting problem ($\hat{H}_0$) as a reference Slater determinant $|\Phi\rangle$. Use second quantization. Define the fermi level/energy. Draw a diagram of the reference state.
 \end{itemize}
 \end{exframe}
+\begin{SCfigure}
+\begin{tikzpicture}[scale=0.6]
+  \draw[->] (-3.5,-1) -- (3.5,-1) node[anchor=west] {$m$};
+  \draw[->] (-3.5,-1) -- (-3.5,3) node[anchor=south] {$e$};
+  \draw (-3.6,0) node[anchor=east] {$1\omega$} -- (-3.4,0);
+  \draw (-3.6,1) node[anchor=east] {$2\omega$} -- (-3.4,1);
+  \draw (-3.6,2) node[anchor=east] {$3\omega$} -- (-3.4,2);
+  \draw (-2,-1.2) node[anchor=north] {$-2$} -- (-2,-.8);
+  \draw (-1,-1.2) node[anchor=north] {$-1$} -- (-1,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (1,-1.2) node[anchor=north] {$+1$} -- (1,-.8);
+  \draw (2,-1.2) node[anchor=north] {$+2$} -- (2,-.8);
+  \begin{scope}
+    \draw (-.5,0) -- (.5,0);
+    \draw[->] (-.25,-.25) node[anchor=north]{$1$} -- (-.25,.25);
+    \draw[<-] (.25,-.25) node[anchor=north]{$2$} -- (.25,.25);
+  \end{scope}
+  \begin{scope}[xshift=-1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+  \end{scope}
+  \begin{scope}[xshift=1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+  \end{scope}
+  \begin{scope}[xshift=-2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+  \end{scope}
+  \begin{scope}[xshift=0cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+  \end{scope}
+  \begin{scope}[xshift=2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+  \end{scope}
+\end{tikzpicture}
+\caption{Ground state of the non-interacting problem, the reference Slater determinant $|\Phi\rangle$. The two electrons occupy the $\u{1}$ and $\d{1}$ spin-orbitals.}
+\label{fig:gs}
+\end{SCfigure}
 Using the new set of units, the Hamiltonian takes the form 
 \begin{align}
 \hat{H} = \hat{H}_0 + \hat{W} = \sum_{i=1}^n \left( \frac{-\nabla^2}{2} +\frac{1}{2}r_i^2\right) + \sum_{i=1}^n\sum_{j=i+1}^n\frac{1}{|{\bf r}_i-{\bf r}_j|}.
@@ -358,7 +396,7 @@ $\d{6}$       & 12                  & 6               & 0                 & $+2$
 \caption{Notation used to denote the spin-orbitals used throughout the project report.\label{tab:1}}
 \end{table*}
 
-We know the form of the single-particle energies, $\varepsilon_{n m}=(2n+|m|+1)/2$, and thus it is easy to see that the lowest energy state for the non-interacting two-electron problem is obtained by placing both electrons in the $n=m=0$ orbital. In the rest of the project we will use the notation found in \tab{1} to denote the spin-orbitals. Using this notation, we are placing the elctrons in the spin-orbitals $\u{1}$ and $\d{1}$, i.e. $|\Phi\rangle = |\u{1}\d{1}\rangle$. This state has energy $E_0^{(2)}=2$, since $\hat{H}_0|\u{1}\d{1}\rangle=2|\u{1}\d{1}\rangle$. 
+We know the form of the single-particle energies, $\varepsilon_{n m}=(2n+|m|+1)/2$, and thus it is easy to see that the lowest energy state for the non-interacting two-electron problem is obtained by placing both electrons in the $n=m=0$ orbital. In the rest of the project we will use the notation found in \tab{1} to denote the spin-orbitals. Using this notation, we are placing the elctrons in the spin-orbitals $\u{1}$ and $\d{1}$, i.e. $|\Phi\rangle = |\u{1}\d{1}\rangle$. This state has energy $E_0^{(2)}=2$, since $\hat{H}_0|\u{1}\d{1}\rangle=2|\u{1}\d{1}\rangle$. The state is shown in \fig{gs} in so called Fock-Darwin representation.
 
 The fermi level is defined as the single particle energy of the highest energy occupied spin-orbital in the Slater determinant. In our case, $E^{(2)}_f=1$. We note that any spin-orbital with energy at or below the fermi level is occupied, while corresponding spin-orbitals with energies above the fermi level are unoccupied.
 
@@ -369,6 +407,359 @@ The fermi level is defined as the single particle energy of the highest energy o
   Construct thereafter all possible two-particle-two-hole excitations $|\Phi_{IJ}^{AB}\rangle$ in a similar manner. Draw diagrams and make sure to again only include states with $M=S_z=0$. 
 \end{itemize}
 \end{exframe}
+\begin{figure}[p]
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+  \draw[->] (-3.5,-1) -- (3.5,-1) node[anchor=west] {$m$};
+  \draw[->] (-3.5,-1) -- (-3.5,3) node[anchor=south] {$e$};
+  \draw (-3.6,0) node[anchor=east] {$1\omega$} -- (-3.4,0);
+  \draw (-3.6,1) node[anchor=east] {$2\omega$} -- (-3.4,1);
+  \draw (-3.6,2) node[anchor=east] {$3\omega$} -- (-3.4,2);
+  \draw (-2,-1.2) node[anchor=north] {$-2$} -- (-2,-.8);
+  \draw (-1,-1.2) node[anchor=north] {$-1$} -- (-1,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (1,-1.2) node[anchor=north] {$+1$} -- (1,-.8);
+  \draw (2,-1.2) node[anchor=north] {$+2$} -- (2,-.8);
+  \begin{scope}
+    \draw (-.5,0) -- (.5,0);
+    \draw[->] (-.25,-.25) node[anchor=north]{$1$} -- (-.25,.25);
+  \end{scope}
+  \begin{scope}[xshift=-1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+  \end{scope}
+  \begin{scope}[xshift=1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+  \end{scope}
+  \begin{scope}[xshift=-2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+  \end{scope}
+  \begin{scope}[xshift=0cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    \draw[<-] (.25,-.25) node[anchor=north]{$10$} -- (.25,.25);
+  \end{scope}
+  \begin{scope}[xshift=2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+  \end{scope}
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.6]
+  \draw[->] (-3.5,-1) -- (3.5,-1) node[anchor=west] {$m$};
+  \draw[->] (-3.5,-1) -- (-3.5,3) node[anchor=south] {$e$};
+  \draw (-3.6,0) node[anchor=east] {$1\omega$} -- (-3.4,0);
+  \draw (-3.6,1) node[anchor=east] {$2\omega$} -- (-3.4,1);
+  \draw (-3.6,2) node[anchor=east] {$3\omega$} -- (-3.4,2);
+  \draw (-2,-1.2) node[anchor=north] {$-2$} -- (-2,-.8);
+  \draw (-1,-1.2) node[anchor=north] {$-1$} -- (-1,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (1,-1.2) node[anchor=north] {$+1$} -- (1,-.8);
+  \draw (2,-1.2) node[anchor=north] {$+2$} -- (2,-.8);
+  \begin{scope}
+    \draw (-.5,0) -- (.5,0);
+    \draw[<-] (.25,-.25) node[anchor=north]{$2$} -- (.25,.25);
+  \end{scope}
+  \begin{scope}[xshift=-1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+  \end{scope}
+  \begin{scope}[xshift=1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+  \end{scope}
+  \begin{scope}[xshift=-2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+  \end{scope}
+  \begin{scope}[xshift=0cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    \draw[->] (-.25,-.25) node[anchor=north]{$9$} -- (-.25,.25);
+  \end{scope}
+  \begin{scope}[xshift=2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+  \end{scope}
+\end{tikzpicture}
+\caption{The two allowed one-particle-one-hole excitations of the $S_z=M=0$ two-electron system, $|\Phi^{\d{5}}_{\d{1}}\rangle$ (left) and $|\Phi_{\u{1}}^{\u{5}}\rangle$ (right). }
+\label{fig:2}
+\end{center}
+\end{figure}
+\begin{figure}[p]
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+  \draw[->] (-3.5,-1) -- (3.5,-1) node[anchor=west] {$m$};
+  \draw[->] (-3.5,-1) -- (-3.5,3) node[anchor=south] {$e$};
+  \draw (-3.6,0) node[anchor=east] {$1\omega$} -- (-3.4,0);
+  \draw (-3.6,1) node[anchor=east] {$2\omega$} -- (-3.4,1);
+  \draw (-3.6,2) node[anchor=east] {$3\omega$} -- (-3.4,2);
+
+  \draw (-2,-1.2) node[anchor=north] {$-2$} -- (-2,-.8);
+  \draw (-1,-1.2) node[anchor=north] {$-1$} -- (-1,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (1,-1.2) node[anchor=north] {$+1$} -- (1,-.8);
+  \draw (2,-1.2) node[anchor=north] {$+2$} -- (2,-.8);
+
+  \begin{scope}
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$1$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$2$} -- (.25,.25);
+  \end{scope}
+
+  \begin{scope}[xshift=-1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$3$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$4$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$5$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$6$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=-2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$7$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$8$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=0cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    \draw[->] (-.25,-.25) node[anchor=north]{$9$} -- (-.25,.25);
+    \draw[<-] (.25,-.25) node[anchor=north]{$10$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$11$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$12$} -- (.25,.25);
+  \end{scope}
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.6]
+  \draw[->] (-3.5,-1) -- (3.5,-1) node[anchor=west] {$m$};
+  \draw[->] (-3.5,-1) -- (-3.5,3) node[anchor=south] {$e$};
+
+  \draw (-3.6,0) node[anchor=east] {$1\omega$} -- (-3.4,0);
+  \draw (-3.6,1) node[anchor=east] {$2\omega$} -- (-3.4,1);
+  \draw (-3.6,2) node[anchor=east] {$3\omega$} -- (-3.4,2);
+
+  \draw (-2,-1.2) node[anchor=north] {$-2$} -- (-2,-.8);
+  \draw (-1,-1.2) node[anchor=north] {$-1$} -- (-1,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (1,-1.2) node[anchor=north] {$+1$} -- (1,-.8);
+  \draw (2,-1.2) node[anchor=north] {$+2$} -- (2,-.8);
+
+  \begin{scope}
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$1$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$2$} -- (.25,.25);
+  \end{scope}
+
+  \begin{scope}[xshift=-1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$3$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$4$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$5$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$6$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=-2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    \draw[->] (-.25,-.25) node[anchor=north]{$7$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$8$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=0cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$9$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$10$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$11$} -- (-.25,.25);
+    \draw[<-] (.25,-.25) node[anchor=north]{$12$} -- (.25,.25);
+  \end{scope}
+
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.6]
+  \draw[->] (-3.5,-1) -- (3.5,-1) node[anchor=west] {$m$};
+  \draw[->] (-3.5,-1) -- (-3.5,3) node[anchor=south] {$e$};
+
+  \draw (-3.6,0) node[anchor=east] {$1\omega$} -- (-3.4,0);
+  \draw (-3.6,1) node[anchor=east] {$2\omega$} -- (-3.4,1);
+  \draw (-3.6,2) node[anchor=east] {$3\omega$} -- (-3.4,2);
+
+  \draw (-2,-1.2) node[anchor=north] {$-2$} -- (-2,-.8);
+  \draw (-1,-1.2) node[anchor=north] {$-1$} -- (-1,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (1,-1.2) node[anchor=north] {$+1$} -- (1,-.8);
+  \draw (2,-1.2) node[anchor=north] {$+2$} -- (2,-.8);
+
+  \begin{scope}
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$1$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$2$} -- (.25,.25);
+  \end{scope}
+
+  \begin{scope}[xshift=-1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$3$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$4$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$5$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$6$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=-2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$7$} -- (-.25,.25);
+    \draw[<-] (.25,-.25) node[anchor=north]{$8$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=0cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$9$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$10$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    \draw[->] (-.25,-.25) node[anchor=north]{$11$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$12$} -- (.25,.25);
+  \end{scope}
+  \end{tikzpicture}
+  \begin{tikzpicture}[scale=0.6]
+  \draw[->] (-3.5,-1) -- (3.5,-1) node[anchor=west] {$m$};
+  \draw[->] (-3.5,-1) -- (-3.5,3) node[anchor=south] {$e$};
+
+  \draw (-3.6,0) node[anchor=east] {$1\omega$} -- (-3.4,0);
+  \draw (-3.6,1) node[anchor=east] {$2\omega$} -- (-3.4,1);
+  \draw (-3.6,2) node[anchor=east] {$3\omega$} -- (-3.4,2);
+
+  \draw (-2,-1.2) node[anchor=north] {$-2$} -- (-2,-.8);
+  \draw (-1,-1.2) node[anchor=north] {$-1$} -- (-1,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (1,-1.2) node[anchor=north] {$+1$} -- (1,-.8);
+  \draw (2,-1.2) node[anchor=north] {$+2$} -- (2,-.8);
+
+  \begin{scope}
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$1$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$2$} -- (.25,.25);
+  \end{scope}
+
+  \begin{scope}[xshift=-1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+    \draw[->] (-.25,-.25) node[anchor=north]{$3$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$4$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$5$} -- (-.25,.25);
+    \draw[<-] (.25,-.25) node[anchor=north]{$6$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=-2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$7$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$8$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=0cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$9$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$10$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$11$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$12$} -- (.25,.25);
+  \end{scope}
+\end{tikzpicture}
+  \begin{tikzpicture}[scale=0.6]
+  \draw[->] (-3.5,-1) -- (3.5,-1) node[anchor=west] {$m$};
+  \draw[->] (-3.5,-1) -- (-3.5,3) node[anchor=south] {$e$};
+
+  \draw (-3.6,0) node[anchor=east] {$1\omega$} -- (-3.4,0);
+  \draw (-3.6,1) node[anchor=east] {$2\omega$} -- (-3.4,1);
+  \draw (-3.6,2) node[anchor=east] {$3\omega$} -- (-3.4,2);
+
+  \draw (-2,-1.2) node[anchor=north] {$-2$} -- (-2,-.8);
+  \draw (-1,-1.2) node[anchor=north] {$-1$} -- (-1,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (1,-1.2) node[anchor=north] {$+1$} -- (1,-.8);
+  \draw (2,-1.2) node[anchor=north] {$+2$} -- (2,-.8);
+
+  \begin{scope}
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$1$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$2$} -- (.25,.25);
+  \end{scope}
+
+  \begin{scope}[xshift=-1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$3$} -- (-.25,.25);
+    \draw[<-] (.25,-.25) node[anchor=north]{$4$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+    \draw[->] (-.25,-.25) node[anchor=north]{$5$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$6$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=-2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$7$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$8$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=0cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$9$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$10$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$11$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$12$} -- (.25,.25);
+  \end{scope}
+\end{tikzpicture}
+\caption{All allowed two-particle-two-hole excitations of the $S_z=M=0$ two-electron system, $|\Phi^{\u{5}\d{5}}_{\u{1}\d{1}}\rangle$ (top left), $|\Phi_{\u{1}\d{1}}^{\u{4}\d{6}}\rangle$ (top right), $|\Phi_{\u{1}\d{1}}^{\d{4}\u{6}}\rangle$ (left), $|\Phi_{\u{1}\d{1}}^{\u{2}\d{3}}\rangle$ (right), and $|\Phi_{\u{1}\d{1}}^{\u{3}\d{2}}\rangle$ (bottom). }
+\label{fig:3}
+\end{center}
+\end{figure}
 The quasiparticle creation-, and annihilation operators are defined by
 \begin{align}
 b^\dagger_i &= c_i \ \ \ \text{ and } \ \ \ b_i = c_i^\dagger,
@@ -381,10 +772,10 @@ In terms of the quasiparticle operators, the reference Slater determinant can be
 
 The one-particle-one-hole excitations can also be written in terms of the quasiparticle operators, as $|\Phi^A_I\rangle=|b_I^\dagger b_A^\dagger\Phi\rangle = c_I c_A^\dagger |\Phi\rangle$. We note that acting on the reference Slater determinant creates two quasiparticles, namely one hole (in a spin-orbital with index $I$, which was previously occupied) and one particle (in a spin-orbital with index $A$, which was previously unoccupied). We also note that the new state contains exactly the same number of "real" particles as the reference Slater.
 
-In general, we may construct one-particle-one-hole excitations with $A$ being any of the $10$ unoccupied spin-orbitals. However, we are restricted to excitations which preserve $S_z=M=0$. Since we are only considering one-particle excitations for the moment, we must demand that the spin of the $A$-spin-orbital must equal that of the $I$-spin-orbital, $\alpha_I=\alpha_A$. This ensures that $S_z=\alpha_A+\alpha_{I'}=0$, with $I'$ being the spin-orbital index of the occupied state which is \emph{not} excited. In the same way, we are also forced to choose $A$ such that $m_A=m_I$ to ensure that $M=m_A+m_{I'}=0$. Adhering to these restrictions means we are only left with two allowed one-particle-one-hole excitations, namely $|\Phi^{\u{5}}_{\u{1}}\rangle$ and $|\Phi^{\d{5}}_{\d{1}}\rangle$. (REMEMBER TO DRAW DIAGRAMS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!)
+In general, we may construct one-particle-one-hole excitations with $A$ being any of the $10$ unoccupied spin-orbitals. However, we are restricted to excitations which preserve $S_z=M=0$. Since we are only considering one-particle excitations for the moment, we must demand that the spin of the $A$-spin-orbital must equal that of the $I$-spin-orbital, $\alpha_I=\alpha_A$. This ensures that $S_z=\alpha_A+\alpha_{I'}=0$, with $I'$ being the spin-orbital index of the occupied state which is \emph{not} excited. In the same way, we are also forced to choose $A$ such that $m_A=m_I$ to ensure that $M=m_A+m_{I'}=0$. Adhering to these restrictions means we are only left with two allowed one-particle-one-hole excitations, namely $|\Phi^{\u{5}}_{\u{1}}\rangle$ and $|\Phi^{\d{5}}_{\d{1}}\rangle$. These are shown in \fig{2} in so called Fock-Darwin representation.
 
 When we consider two-particle-two-hole excitations, we may once again in general use $A$, and $B$ as any of the unoccupied spin-orbitals. But, since the same restrictions apply in this case, we must now demand that $S_z=\alpha_I + \alpha_J=0$ and $M=m_I+m_J=0$. This leaves us with five possibilities,
-$|\Phi^{\u{5}\d{5}}_{\u{1}\d{1}}\rangle$, $|\Phi^{\u{4}\d{6}}_{\u{1}\d{1}}\rangle$, $|\Phi^{\u{6}\d{4}}_{\u{1}\d{1}}\rangle$, $|\Phi^{\u{2}\d{3}}_{\u{1}\d{1}}\rangle$, and $|\Phi^{\u{3}\d{2}}_{\u{1}\d{1}}\rangle$. 
+$|\Phi^{\u{5}\d{5}}_{\u{1}\d{1}}\rangle$, $|\Phi^{\u{4}\d{6}}_{\u{1}\d{1}}\rangle$, $|\Phi^{\u{6}\d{4}}_{\u{1}\d{1}}\rangle$, $|\Phi^{\u{2}\d{3}}_{\u{1}\d{1}}\rangle$, and $|\Phi^{\u{3}\d{2}}_{\u{1}\d{1}}\rangle$. These are shown in \fig{3} in so called Fock-Darwin representation.
 
 We note here that e.g. $|\Phi^{\u{2}\d{3}}_{\u{1}\d{1}}\rangle$ and $|\Phi^{\u{2}\d{3}}_{\d{1}\u{1}}\rangle$ represent the same state, since they differ by at most a minus sign because the $b$-operators for different spin-orbitals all anti-commute.
 
@@ -516,6 +907,8 @@ Finally, we consider the last term of \eq{6},
 \end{align}
 where only the sum terms with two creation and two annihilation operators (one $i$ and one $a$ index each) give non-zero contributions. And once again, we have only one non-vanishing contraction for each term because of delta functions across $i$ and $a$ indices are always zero. 
 
+Please do note that we have been lazy about the anti-symmetric nature of the $w$ integrals in the previous sections. Any time a $w^{ij}_{kl}$ is mentioned, anti-symmetrizing is assumed so we are really talking about $(w^{ij}_{kl})_{\text{AS}}$.
+
 We have now developed all the tools we need in order to set up the $3\times3$ CIS matrix and diagonalize it. This is done in the same {\sc Matlab} script as the one solving exercise 2b). The resulting matrix takes the form
 \begin{align}
 H_\text{CIS}^{(2)}=\bmat{ccc}{\langle \Phi | \hat{H} | \Phi \rangle & \langle \Phi | \hat{H} | \Phi^{\u{5}}_{\u{1}} \rangle & \langle \Phi | \hat{H} | \Phi^{\d{5}}_{\d{1}} \rangle \\
@@ -533,7 +926,66 @@ with eigenvalues $3.1570$, $4.8421$, and $5.2909$. We note that the new approxim
   Compute the reference energy $E_\text{ref}^{(6)}=\langle \Phi|\hat{H}|\Phi\rangle$, inserting the numerical values for the $\hat w$ matrix elements.  Thereafter you will need to set up the appropriate Hamiltonian matrix which involves also one-particle-one-hole excitations, also using numerical values for matrix elements. Diagonalize this matrix and compare your eigenvalues with $E_\text{ref}^{(6)}$ and comment the result. The best numerical result for our Hamiltonian is obtained with Diffusion Monte Carlo calculations, and for $\omega=1$ the energy for the ground state is $E_0=20.1597$ atomic units.
 \end{itemize}
 \end{exframe}
-For six electrons, the reference Slater determinant is $|\Phi\rangle = |\u{1}\d{1}\u{2}\d{2}\u{3}\d{3}\rangle$, i.e. the one with spatial orbitals $(n=0,m=0)$, $(n=0,m=-1)$, and $(n=0,m=1)$ occupied. We note that the energy of this Slater determinant under the non-interacting Hamiltonian is $E_0^{(6)}=10$, and the fermi level is now at $E_f^{(6)}=2$ (the energy of the spin-orbitals $\u{2}$, $\d{2}$, $\u{3}$, and $\d{3}$).
+\begin{SCfigure}
+  \begin{tikzpicture}[scale=0.6]
+  \draw[->] (-3.5,-1) -- (3.5,-1) node[anchor=west] {$m$};
+  \draw[->] (-3.5,-1) -- (-3.5,3) node[anchor=south] {$e$};
+
+  \draw (-3.6,0) node[anchor=east] {$1\omega$} -- (-3.4,0);
+  \draw (-3.6,1) node[anchor=east] {$2\omega$} -- (-3.4,1);
+  \draw (-3.6,2) node[anchor=east] {$3\omega$} -- (-3.4,2);
+
+  \draw (-2,-1.2) node[anchor=north] {$-2$} -- (-2,-.8);
+  \draw (-1,-1.2) node[anchor=north] {$-1$} -- (-1,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (0,-1.2) node[anchor=north] {$0$} -- (0,-.8);
+  \draw (1,-1.2) node[anchor=north] {$+1$} -- (1,-.8);
+  \draw (2,-1.2) node[anchor=north] {$+2$} -- (2,-.8);
+
+  \begin{scope}
+    \draw (-.5,0) -- (.5,0);
+    \draw[->] (-.25,-.25) node[anchor=north]{$1$} -- (-.25,.25);
+    \draw[<-] (.25,-.25) node[anchor=north]{$2$} -- (.25,.25);
+  \end{scope}
+
+  \begin{scope}[xshift=-1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+    \draw[->] (-.25,-.25) node[anchor=north]{$3$} -- (-.25,.25);
+    \draw[<-] (.25,-.25) node[anchor=north]{$4$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=1cm,yshift=1cm]
+    \draw (-.5,0) -- (.5,0);
+    \draw[->] (-.25,-.25) node[anchor=north]{$5$} -- (-.25,.25);
+    \draw[<-] (.25,-.25) node[anchor=north]{$6$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=-2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$7$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$8$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=0cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$9$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$10$} -- (.25,.25);
+  \end{scope}
+
+
+  \begin{scope}[xshift=2cm,yshift=2cm]
+    \draw (-.5,0) -- (.5,0);
+    %\draw[->] (-.25,-.25) node[anchor=north]{$11$} -- (-.25,.25);
+    %\draw[<-] (.25,-.25) node[anchor=north]{$12$} -- (.25,.25);
+  \end{scope}
+\end{tikzpicture}
+\caption{Ground state of the non-interacting problem, the reference Slater determinant $|\Phi\rangle$ for the six-electron system. The electrons occupy the $\u{1}$, $\d{1}$, $\u{2}$, $\d{2}$, $\u{3}$, and $\d{3}$ spin-orbitals.}
+\label{fig:4}
+\end{SCfigure}
+For six electrons, the reference Slater determinant is $|\Phi\rangle = |\u{1}\d{1}\u{2}\d{2}\u{3}\d{3}\rangle$, i.e. the one with spatial orbitals $(n=0,m=0)$, $(n=0,m=-1)$, and $(n=0,m=1)$ occupied. We note that the energy of this Slater determinant under the non-interacting Hamiltonian is $E_0^{(6)}=10$, and the fermi level is now at $E_f^{(6)}=2$ (the energy of the spin-orbitals $\u{2}$, $\d{2}$, $\u{3}$, and $\d{3}$). The reference state is shown in \fig{4} in so called Fock-Darwin representation.
 
 In the same was as for the two-electron case, we can calculate the reference energy using our algorithm (the script should be general enough to handle both cases). The result, $E_\text{ref}^{(6)}=22.2198$, is not great. We note that the relative error in this approximation of the ground state energy (taking $E_0$ to be the \emph{true} ground state energy now) is $10.2\%$. In comparison, the relative error in the approximation in the two-electron case was $8.4\%$. 
 
@@ -596,8 +1048,8 @@ and left-multiply by the Hermitian conjugate, giving
 \begin{align}
 \langle \tilde{\psi}_{q'}|\tilde{\psi}_q\rangle &= \sum_{p=1}^6 \langle\tilde{\psi}_{q}|{\psi}_p\rangle U_{pq} \nn\\
 \delta_{q'q} &=\sum_{p'=1}^6\sum_{p=1}^6 U^*_{q'p'}\underbrace{\langle\psi_{p'}|{\psi}_p\rangle}_{\delta_{p'p}} U_{pq} \nn\\
- &= \sum_{p'=1}^6\sum_{p=1}^6 \delta_{p'p} U^*_{q'p'} U_{pq} \nn\\
- &= \sum_{p=1}^6 U^*_{q'p}U_{pq} = U^\dagger U = \mathbb{1}.
+ \mathbb{1} &= \sum_{p'=1}^6\sum_{p=1}^6 \delta_{p'p} U^*_{q'p'} U_{pq} \nn\\
+ &= \sum_{p=1}^6 U^*_{q'p}U_{pq} = U^\dagger U.
 \end{align}
 
 The matrix $U$ contains the coefficients of the unknown orbitals, $\tilde \psi_q$, expanded in the basis of the known $\psi_p$. Specifically, column $q$ contains the coefficients for the unkown $\tilde\psi_q$. The first $N$ orbitals are usually called occupied, while the remaining are called virtual. For the two-electron case, we note that the first column of $U$ correspond to the occupied orbitals, while colums from 2 up to and including 6 correspond to the virtual orbitals.
@@ -734,10 +1186,10 @@ E_\text{RHF} &= 2\sum_{p=1}^6 \sum_{i=1}^{N/2} U^*_{pi}({\psi}_p | \hat{h} | {\p
   discuss both cases.
 \end{itemize}
 \end{exframe}
-A {\sc Matlab} script which performs these calculations can be found the appendix. The convergence for $N=2$ is plotted in \fig{1}, and we note that a linear behaviour in a semi-log plot means the convergence exibits a power law behaviour. The analogous plot for the $N=6$ is ommitted, since it looks basically the same as \fig{1}.
+A {\sc Matlab} script which performs these calculations can be found the appendix. The convergence for $N=2$ is plotted in \fig{1}, and we note that a linear behaviour in a semi-log plot means the convergence exibits a power law behaviour (until convergence is reached). The analogous plot for the $N=6$ is ommitted, since it looks basically the same as \fig{1}.
 \begin{figure}[h]
 \centering
-\includegraphics[width=10cm]{convergence1.png}
+\includegraphics[width=10cm]{convergence1.pdf}
 \caption{Convergence of the restricted Hartree-Fock energy for $N=2$. \label{fig:1}}
 \end{figure}
 
@@ -745,12 +1197,25 @@ The restricted Hartree-Fock energies appear to converge to $E_\text{RHF}^{(2)}=3
 
 \newpage
 \subsection*{Appendix}
+This code can be found on \url{https://github.com/mortele/FYS-KJM4480/tree/master/Project1}. Downloading and running can be done by 
+\begin{lstlisting}
+> git clone git@github.com:mortele/FYS-KJM4480.git
+> matlab -nodisplay -nosplash -nodesktop -r "run('exercise2.m')"
+\end{lstlisting}
 \subsubsection*{A1: Code for exercise 2}
 \lstinputlisting[language=Matlab]{exercise2.m}
 
 \newpage
 \subsubsection*{A2: Code for exercise 3}
+This code can be found on \url{https://github.com/mortele/FYS-KJM4480/tree/master/Project1}. Downloading and running can be done by 
+\begin{lstlisting}
+> git clone git@github.com:mortele/FYS-KJM4480.git
+> matlab -nodisplay -nosplash -nodesktop -r "run('exercise3.m')"
+\end{lstlisting}
 \lstinputlisting[language=Matlab]{exercise3.m}
+
+
+
 \end{document}
 
 

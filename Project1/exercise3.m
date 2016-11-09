@@ -121,6 +121,7 @@ subplot(2,1,1);
 h1 = plot(nan, nan, 'r-o');
 ylabel('$E_{RHF}$', 'interpreter', 'latex','FontSize', 16);
 oldEpsilon = 1;
+finalIteration = 0;
 
 for iteration=1:maxIterations
     % Compute D and F, and check that F is hermitian.
@@ -154,14 +155,29 @@ for iteration=1:maxIterations
     else
         Hstr = 'No';
     end
-    fprintf('Iteration: %2d  E = %-11.7f  F^H==F? %s  delta_k = %-11.7g\n',...
+    fprintf('Iteration: %2d  E = %-11.7f  F Hermitian? %s  delta_k = %-11.7g\n',...
             iteration, ...
             E_SCF(iteration), ...
             Hstr,...
             deltak(iteration));
     oldEpsilon = epsilon;
-    if abs(deltak(iteration)) < eps 
+    if abs(deltak(iteration)) < eps || iteration==maxIterations 
+        finalIteration = iteration;
         break;
     end
 end
+figure(2);
+semilogy(linspace(1,finalIteration,finalIteration), ...
+        deltak(1:finalIteration), 'ro-');
+xlabel('Iteration', 'interpreter', 'latex','FontSize', 16);
+ylabel('$\delta_k$', 'interpreter', 'latex','FontSize', 16);
+% ax = gca;
+% outerpos = ax.OuterPosition;
+% ti = ax.TightInset; 
+% left = outerpos(1) + ti(1);
+% bottom = outerpos(2) + ti(2);
+% ax_width = outerpos(3) - ti(1) - ti(3);
+% ax_height = outerpos(4) - ti(2) - ti(4);
+% ax.Position = [left bottom ax_width ax_height];
+exit;
 end

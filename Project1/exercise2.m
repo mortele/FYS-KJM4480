@@ -97,4 +97,5 @@ assignin('base', 'A', A);
 assignin('base', 'E_ref', E_ref);
 assignin('base', 'H', H);
 assignin('base', 'E_CIS', E_CIS);
+exit;
 end
