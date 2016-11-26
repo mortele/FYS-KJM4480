@@ -616,8 +616,8 @@ where all other $\ps$ combinations in the sum give zero since the Slater does no
       \filldraw (1,0) node[anchor=north,inner sep=.5cm] {$-$} ;
       \filldraw (0,1) circle (0.25cm); 
       \filldraw (1,1) circle (0.25cm); 
-      \filldraw (0,3) circle (0.25cm); 
-      \filldraw (1,3) circle (0.25cm);
+      \filldraw (0,2) circle (0.25cm); 
+      \filldraw (1,2) circle (0.25cm);
       \filldraw (0.5,4.5) node[anchor=north,inner sep=.5cm] {$\#4$} ;
     \end{scope}
     \begin{scope}[xshift=4cm]
@@ -629,8 +629,8 @@ where all other $\ps$ combinations in the sum give zero since the Slater does no
       \filldraw (1,0) node[anchor=north,inner sep=.5cm] {$-$} ;
       \filldraw (0,1) circle (0.25cm); 
       \filldraw (1,1) circle (0.25cm); 
-      \filldraw (0,2) circle (0.25cm); 
-      \filldraw (1,2) circle (0.25cm);
+      \filldraw (0,3) circle (0.25cm); 
+      \filldraw (1,3) circle (0.25cm);
       \filldraw (0.5,4.5) node[anchor=north,inner sep=.5cm] {$\#5$} ;
     \end{scope}
     \begin{scope}[xshift=8cm]
@@ -749,9 +749,9 @@ e.g. $70$ for the $M=4$ case.
     \end{scope}
   \end{tikzpicture}
 \end{center}
-\caption{All the basis states in the subspace of the Hilbert space with $S_z=0$, $P=0$, $N=4$, and $M=4$. \label{fig:2}}
+\caption{All the basis states in the subspace of the Hilbert space with $S_z=0$, $P=0$, $N=4$, and $M=4$. \label{fig:10}}
 \end{figure}
-Assuming we are restricted to the $N=4$ case, we have the possible basis set shown in \fig{2}.
+Assuming we are restricted to the $N=4$ case, we have the possible basis set shown in \fig{10}.
 
 
 \begin{exframe}
@@ -771,22 +771,253 @@ Inserting the definitions $\epsilon_p$ and $\hat V$ with $\hat P_p$ and $\hat P^
 &= \sum_p (p-1) \hat n_p - \frac{1}{2}g \left(\sum_p\hat P_p^\dagger\right) \left( \sum_q \hat P_q\right).
 \end{align}
 
-
-\subsubsection{Exercise 2}
+\newpage
+\subsection*{Exercise 2}
 \begin{exframe}
 \begin{itemize}
   \item[a)] Show that $\sum_s \hat P_s |p\bar p q \bar q\rangle = |p\bar p\rangle + |q \bar q\rangle$. Next, compute the closed form expression for all the matrix elements $\left\langle p'\bar p' q' \bar q' \right|\hat H \left|p\bar p q \bar q \right\rangle$.
 \end{itemize}
 \end{exframe}
+From now on, states labeled by capital letters denote pair states, i.e. $|IJ\rangle = |i\bar i j\bar j\rangle$, with $i$ and $j$ being single particle orbital indices. We use the numbering shown in \fig{1}.
+
+Operating on a state of two pairs with $\sum_p \hat P$ yields
+\begin{align}
+\sum_r \hat P_r |p\bar p q\bar q\rangle &= \hat P_p |p\bar p q\bar q\rangle + \hat P_q |p\bar p q\bar q\rangle \nn\\
+%
+&= |p\bar p \rangle + |q\bar q\rangle,
+\end{align}
+where all the terms in the sum vanish, except for when the $r$-pair is in the Slater.
+
+Let us now compute the matrix elements of the total Hamiltonian. We find that
+\begin{align}
+\left\langle p\bar p q\bar q \right| \hat H \left| r \bar r s \bar s \right\rangle &= \left\langle PQ \left| \hat H_0 + \hat V  \right| RS \right\rangle \nn\\
+%
+&= \left\langle PQ \left| \sum_j (j-1) \hat n_j \right| RS \right\rangle -\left\langle PQ \left| \frac{1}{2}g \left(\sum_i\hat P_i^\dagger\right) \left( \sum_j \hat P_j\right)  \right| RS \right\rangle,
+\end{align}
+where 
+\begin{align}
+\left\langle PQ \left| \sum_j (j-1) \hat n_j \right| RS \right\rangle &= \left\langle p \bar p q \bar q \left| \sum_j (j-1) \hat n_j \right| r\bar r s\bar s\right\rangle \nn\\
+% 
+&= \left\langle p \bar p q \bar q \left| \big[ (r-1)\hat n_r + (s-1)\hat n_s \big] \right| r\bar r s\bar s\right\rangle \nn\\
+%
+&= \left\langle p \bar p q \bar q \left| \big[ (r-1)\big( c_{r+}^\dagger c_{r+} + c_{r-}^\dagger c_{r-} \big) + (s-1)\big( c_{s+}^\dagger c_{s+} + c_{s-}^\dagger c_{s-} \big) \big] \right| r\bar r s\bar s\right\rangle \nn\\
+% 
+&= \left\langle p \bar p q \bar q \left| \big[ 2(r-1) + 2(s-1) \big] \right| r\bar r s\bar s\right\rangle \nn\\
+%
+&= 2(r-1) \langle p \bar p q \bar q | r\bar r s\bar s\rangle + 2(s-1) \langle p \bar p q \bar q | r\bar r s\bar s\rangle \nn\\
+%
+&= 2(r-1) \delta_{pr}\delta_{qs} + 2(s-1) \delta_{pr}\delta_{qs} \nn\\
+%
+&= 2\delta_{pr}\delta_{qs} \big[r+s-2\big],
+\end{align}
+and 
+\begin{align}
+\left\langle PQ \left| \frac{1}{2}g \left(\sum_i\hat P_i^\dagger\right) \left( \sum_j \hat P_j\right)  \right| RS \right\rangle &= \frac{1}{2}g\left\langle PQ \left|  \left(\sum_i\hat P_i^\dagger\right) \left(\hat P_r + \hat P_s\right)  \right| RS \right\rangle \nn\\
+%
+&= \frac{1}{2}g\left\langle PQ \left|  \left(\sum_i\hat P_i^\dagger\right)\right|  \Big[\big |R\big\rangle + \big |S\big\rangle  \Big] \right) \nn\\
+%
+&= \frac{1}{2}g \left\langle \left(\sum_i\hat P_i^\dagger\right)^\dagger PQ \Bigg|  \Big[\big |R\big\rangle + \big |S\big\rangle  \Big] \right) \nn\\
+%
+&= \frac{1}{2}g \left\langle \left(\sum_i\hat P_i\right) PQ \Bigg|  \Big[\big |R\big\rangle + \big |S\big\rangle  \Big] \right) \nn\\
+%
+&= \frac{1}{2}g \left\langle \left(\hat P_p + \hat P_q\right) PQ \Big|  \Big[\big |R\big\rangle + \big |S\big\rangle  \Big] \right) \nn\\
+%
+&= \frac{1}{2}g  \Big[\big\langle P\big| + \big \langle Q\big|  \Big] \Big|  \Big[\big |R\big\rangle + \big |S\big\rangle  \Big] \nn
+\end{align}
+\begin{align}
+&= \frac{1}{2}g \Big(   \left\langle P\big| R\right\rangle + \left\langle P\big| S\right\rangle  + \left\langle Q\big| R\right\rangle  + \left\langle Q\big| S\right\rangle  \Big) \nn\\
+%
+&= \frac{1}{2}g \Big(   \left\langle p\bar p | r \bar r\right\rangle + \left\langle p \bar p| s\bar s\right\rangle  + \left\langle q \bar q| r \bar r\right\rangle  + \left\langle q\bar q|s \bar s\right\rangle  \Big) \nn\\
+%
+&= \frac{1}{2}g \Big( \delta_{pr} + \delta_{ps} + \delta_{qr} + \delta_{qs}\Big).
+\end{align}
+Combining $\langle \Phi | \hat H_0 | \Phi \rangle$ and $\langle \Phi | \hat V | \Phi \rangle$ we find the matrix elements of the total Hamiltonian as 
+\begin{align}
+\left\langle p\bar p q\bar q \right| \hat H \left| r \bar r s \bar s \right\rangle &= 2\delta_{pr}\delta_{qs} \big[r+s-2\big] - \frac{1}{2}g \Big( \delta_{pr} + \delta_{ps} + \delta_{qr} + \delta_{qs}\Big). \label{eq:5}
+\end{align}
+
+\begin{exframe}
+\begin{itemize}
+  \item[b)] We now set $\xi=1$, and consider $g\in [-1,1]$. Using your favorite compting environment, diagonalize the Hamiltonian matrix numerically. Plot the eigenvalues $E_k=E_k(g)$ as function of $g$ in a single figure. Highlight the ground-state energy. Do you observe any degeneracies?
+\end{itemize}
+\end{exframe}
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{FCI_E.pdf}
+\caption{The energies found from full configuration-interaction as functions of the two-particle potential strength, $g$. We note that energies three and four coincide, i.e. this is a degenerate energy level. \label{fig:2}}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{FCI_f.pdf}
+\caption{The probability of finding the system in the unperturbed ground state, $f_\text{FCI}(g)=|\langle 1|\Psi(g)\rangle|^2$\label{fig:3}}
+\end{figure}
+The relevant\footnote{Some parts are ommitted for clarity (setting of variables, plotting, etc.).} parts of the {\sc Matlab} code for diagonalizing the full configuration-interaction matrix is shown in the appendix. The entire code is available at \url{https://github.com/mortele/FYS-KJM4480/tree/master/Project2}.
+
+Using the capital letter notation for the states with the numbering shown in \fig{1}, the FCI matrix looks like
+\begin{align}
+H_\text{FCI} = \left[ \langle I |\hat H|J\rangle \right]_{IJ} =  \bmat{cccccc}{\langle 1|\hat H |1\rangle & \langle 1|\hat H |2\rangle & \langle 1|\hat H |3\rangle & \langle 1|\hat H |4\rangle & \langle 1|\hat H |5\rangle & \langle 1|\hat H |6\rangle \\
+\langle 2|\hat H |1\rangle & \langle 2|\hat H |2\rangle & \langle 2|\hat H |3\rangle & \langle 2|\hat H |4\rangle & \langle 2|\hat H |5\rangle & \langle 2|\hat H |6\rangle \\
+\langle 3|\hat H |1\rangle & \langle 3|\hat H |2\rangle & \langle 3|\hat H |3\rangle & \langle 3|\hat H |4\rangle & \langle 3|\hat H |5\rangle & \langle 3|\hat H |6\rangle \\
+\langle 4|\hat H |1\rangle & \langle 4|\hat H |2\rangle & \langle 4|\hat H |3\rangle & \langle 4|\hat H |4\rangle & \langle 4|\hat H |5\rangle & \langle 4|\hat H |6\rangle \\
+\langle 5|\hat H |1\rangle & \langle 5|\hat H |2\rangle & \langle 5|\hat H |3\rangle & \langle 5|\hat H |4\rangle & \langle 5|\hat H |5\rangle & \langle 5|\hat H |6\rangle \\
+\langle 6|\hat H |1\rangle & \langle 6|\hat H |2\rangle & \langle 6|\hat H |3\rangle & \langle 6|\hat H |4\rangle & \langle 6|\hat H |5\rangle & \langle 6|\hat H |6\rangle}.
+\end{align}
+We note that $H_\text{FCI}\in \R^{6\times6}$. The energies as functions of the varying $g$ are shown in \fig{2}. We note the degeneracies in energy levels three and four. The ground state energy is highlighted (bold line). Since $\hat V$ has an overall minus sign, a positive $g$ coefficient means pairing is energetically favorable. We can see this from the negative slopes in \fig{2}: As $g$ increases, all the states decrease in energy. The opposite is true for negative $g$, when pairing is energetically un-favorable.
+
+The probability of finding the system in the unperturbed ground state as a function of $g$ is shown in \fig{3}. We note that for $g=0$, we are in the unperturbed system and $f_\text{FCI}=1$. For positive $g$, when pairing becomes favorable, the ground state (of the full problem) shifts relatively rapidly away from the unperturbed ground state. For negative $g$, when pairing yields higher energies, this shift is less pronounced as expected. 
+
+\begin{exframe}
+\begin{itemize}
+  \item[c)] We now turn to CISD approximation, using $|\Phi\rangle = |1\rangle$ as the reference. Explain why the sinly excited determinants will not contribute to the exact eigenfunction, i.e. that CISD is the same as CID. 
+
+  Show that the doubly excited determinants can be written 
+  \begin{align}
+  \left|\Phi_{i\bar i}^{a\bar a}\right\rangle\equiv \hat P_a^\dagger P_i |\Phi\rangle, \ \ \ i=1,2, \ \ a=3,4.
+  \end{align}
+  What is the dimension of the CID space? How many basis functions from the FCI space do you miss?
+
+  Find the CID Hamiltonian matrix. Diagonalize this matrix numerically for $g\in [-1,1]$ and plot the \emph{ground-state} eigenvalue as a function of $g$. Plot also the ground-state probaility. Compare with FCI and discuss.
+\end{itemize}
+\end{exframe}
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{CID_E.pdf}
+\caption{ The energies found from configuration-interaction doubles as functions of the two-particle potential strength, $g$. \label{fig:4}}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{CID_f.pdf}
+\caption{The probability of finding the system in the unperturbed ground state, $f_\text{CID}(g)=|\langle 1|\Psi(g)\rangle|^2$\label{fig:5}}
+\end{figure}
+The singly excited states, $|\Phi_i^a\rangle = c^\dagger_a c_i |\Phi\rangle$, have one of the pairs in $|\Phi\rangle$ broken. In other words, $\hat P|\Phi_i^a\rangle = 1|\Phi_i^a\rangle$, as only a single pair is left. But we know that $[\hat H, \hat P]=0$ and so $\hat H$ preserves the number of pairs. This means 
+\begin{align}
+\langle \Phi | \hat H | \Phi_i^a\rangle &= \big\langle \Phi \big| \left( \sum_j \alpha_j \big|\Psi_j\big\rangle \right) = 0,
+\end{align}
+where $\alpha_j\in\R$ and $\Psi_j$ are some states with $P=1$. We note that $\langle \Phi | \Psi_j\rangle=0$ for any such state. This means in effect that singly excited states will not couple to the reference, or the doubly excited states and as such will not contribute to the ground state energy. 
+
+For CISD, the Hamiltonian matrix will have structure as follows:
+\begin{align}
+H_\text{CISD} = \bmat{ccc}{\\ \bmat{ccc}{& & \\ & \big\langle I \big| \hat H\big| J \big\rangle & \\ & & } & & \bmat{ccc}{& & \\ & \big\langle I \big| \hat H\big| J_{i\bar i}^{a\bar a} \big\rangle & \\ & & } \\
+& \bmat{ccc}{& & \\ & \big\langle I_i^a \big| \hat H\big| J_j^b \big\rangle & \\ & & } & \\
+\bmat{ccc}{& & \\ & \big\langle I_{i\bar i}^{a\bar a} \big| \hat H\big| J \big\rangle & \\ & & } & & \bmat{ccc}{& & \\ & \big\langle I_{i\bar i}^{a \bar a} \big| \hat H\big| J_{j\bar j}^{b\bar b} \big\rangle & \\ & & } \\ &},
+\end{align} 
+where ommitted entries are all zero. We see clearly from this structure that just removing the singles entries will not affect the diagonalized states and energies for CID. 
+
+The doubly excited states, written in terms of creation operators relative to the true vacuum, are defined as $|\Phi_{ij}^{ab}\rangle=c^\dagger_a c^\dagger_b c_i c_j |\Phi\rangle$. Restricted to the subspace of $P=2$, $S_z=0$, the only allowed excitations are two excitations from level $p$ under the Fermi level (i.e. $p\le 2$) up to two excitations to level $a$ over the Fermi level (i.e. $a\ge 3$). Obviously, either excited orbital will need to have different spin-projection in order to preserve $S_z=0$. This means $|\Phi_{ij}^{ab}\rangle=c^\dagger_a c^\dagger_{\bar a} c_i c_{\bar i} |\Phi\rangle = \hat P^\dagger_a \hat P_i |\Phi\rangle$.
+
+The only state which can \emph{not} be reached by only exciting one pair from the reference state is the state denoted number six in \fig{1}. However, all of the other states are contained in the CID space, meaning this subspace has dimension five. 
+
+The relevant parts of the {\sc Matlab} code for diagonalizing the configuration-interaction doubles matrix is shown in the appendix. The entire code is once again available at \url{https://github.com/mortele/FYS-KJM4480/tree/master/Project2}. 
+
+The resulting energies and ground state probabilities are shown in Figs. (\ref{fig:4}) and (\ref{fig:5}). We note that the degeneracy from FCI is broken when the sixth state is removed. We also note that this highly excited sixth state is not very relevant for the ground (unperturbed) ground state probability, meaning removing it does not change the probability very much (after diagonlizing, the coefficient $(H_\text{FCI})_{1,6}\propto0.05$).
+
+
+\begin{exframe}
+\begin{itemize}
+  \item[d)] Next up is Rayleigh-Schrödinger pertubation theory. Write down the expression for third-order pertubation theory for the ground-state energy for this model. Which matrix elements of $\hat H$ are needed?
+\end{itemize}
+\end{exframe}
+Using the same notation as before ($|\Phi\rangle = |12\rangle$), and defining the projection operator 
+\begin{align}
+\hat R = \sum_{j\not=k} \frac{1}{\varepsilon_k-\varepsilon_j}|\phi_j\rangle \langle \phi_j| \equiv \sum_{j\not=k} \gamma_j |\phi_j\rangle \langle \phi_j|,
+\end{align}
+with $\gamma_{ij} \equiv 1/(\varepsilon_{12}-\varepsilon_{ij})$, we can write the first, second, and third corrections to the $k=1$ energy according to RSPT3 as
+\begin{align}
+E^{(0)}_1 &= \langle \phi_1 |\hat H_0 |\phi_1\rangle, \\
+%
+E^{(1)}_1 &= \langle \phi_1 |\hat V |\phi_1\rangle, \\
+%
+E^{(2)}_1 &= \langle \phi_1 |\hat V \hat R \hat V |\phi_1\rangle, \ \ \text{ and }\\
+%
+E^{(3)}_1 &= \langle \phi_1 |\hat V \hat R \hat V \hat R \hat V |\phi_1\rangle - E^{(1)}\langle \phi_1 |\hat V \hat R^2 \hat V |\phi_1\rangle.
+\end{align}
+From now on, we will ommit the subscript 1, and use $|\phi_1\rangle = |\Phi\rangle = |12\rangle$. 
+
+Computing $E^{(0)}=\langle 12 | \hat H_0 | 12\rangle=2(1-1)\langle12|12\rangle+2(2-1)\langle12|12\rangle=2$ is easy, and $E^{(1)}=-g$ can be seen from \eq{5}. Moving on, we can write out the expression for $E^{(2)}$ as
+\begin{align}
+E^{(2)} &= \langle \phi_1 |\hat V \hat R \hat V |\phi_1\rangle \nn\\
+%
+&= -\frac{1}{2}g\left\langle 12 \Bigg| \hat V \hat R \left(\sum_p \hat P^\dagger_p \right)\left( \sum_q \hat P_q \right) \Bigg| 12\right\rangle \nn\\
+%
+&= -\frac{1}{2}g\left\langle 12 \Bigg| \hat V \hat R \left(\sum_p \hat P^\dagger_p \right) \left[  \hat P_1 + \hat P_2  \right]  \Bigg| 12\right\rangle  \nn\\
+%
+&= -\frac{1}{2}g\left\langle 12 \Bigg| \hat V \hat R \left(\sum_p \hat P^\dagger_p \right)   \right| \Big[ \big|1\big\rangle + \big|2\big\rangle\Big] \nn\\
+%
+&= -\frac{1}{2}g\left\langle 12 \Bigg| \hat V \hat R \left[  \hat P^\dagger_1 + \hat P^\dagger_2 + P^\dagger_3 + P^\dagger_4  \right]   \right| \Big[ \big|1\big\rangle + \big|2\big\rangle\Big] \nn\\
+%
+&= -\frac{1}{2}g\left\langle 12 \Big| \hat V \hat R \right| \Big[ \big|12\big\rangle + \big|12\big\rangle + \big|13\big\rangle + \big|14\big\rangle + \big|23\big\rangle + \big|24\big\rangle\Big] \nn\\
+%
+&= -\frac{1}{2}g\left\langle 12 \Big| \hat V \sum_{j\not=1}\gamma_j |\phi_j\rangle\langle \phi_j| \right| \Big[ 2\big|12\big\rangle + \big|13\big\rangle + \big|14\big\rangle + \big|23\big\rangle + \big|24\big\rangle\Big] \nn\\
+%
+&= -\frac{1}{2}g\Big\langle 12 \Big| \hat V \sum_{j\not=1}\gamma_j |\phi_j\rangle\langle \phi_j|  \Big[ 2\big|12\big\rangle + \big|13\big\rangle + \big|14\big\rangle + \big|23\big\rangle + \big|24\big\rangle\Big] \nn\\
+%
+&= -\frac{1}{2}g\Big\langle 12 \Big| \hat V \Big(\gamma_{13} |13\rangle\langle 13| + \gamma_{14} |14\rangle\langle 14| + \gamma_{23} |23\rangle\langle 23| + \gamma_{24} |24\rangle\langle 24| + \gamma_{34} |34\rangle\langle 34| \Big) \nn\\ 
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \Big[ 2\big|12\big\rangle + \big|13\big\rangle + \big|14\big\rangle + \big|23\big\rangle + \big|24\big\rangle\Big] \nn\\
+%
+&= -\frac{1}{2}g\Big\langle 12 \Big| \hat V \Big[ \gamma_{13}\big|13\big\rangle + \gamma_{14}\big|14\big\rangle + \gamma_{23}\big|23\big\rangle + \gamma_{24}\big|24\big\rangle\Big] \nn\\
+%
+&= -\frac{1}{2}g\Big( \gamma_{13}\big\langle12\big|\hat V\big|13\big\rangle + \gamma_{14}\big\langle12\big|\hat V\big|14\big\rangle + \gamma_{23}\big\langle12\big|\hat V\big|23\big\rangle + \gamma_{24}\big\langle12\big|\hat V\big|24\big\rangle\Big).
+\end{align}
+Secondly, we move on to consider $E^{(3)}$, which we split in two. For simplicity, let us first compute $\hat R^2$ as
+\begin{align}
+\hat R^2 &= \hat R \hat R = \Big( \gamma_{13} |13\rangle\langle 13| + \gamma_{14} |14\rangle\langle 14| + \gamma_{23} |23\rangle\langle 23| + \gamma_{24} |24\rangle\langle 24| + \gamma_{34} |34\rangle\langle 34|  \Big) \nn\\
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \Big( \gamma_{13} |13\rangle\langle 13| + \gamma_{14} |14\rangle\langle 14| + \gamma_{23} |23\rangle\langle 23| + \gamma_{24} |24\rangle\langle 24| + \gamma_{34} |34\rangle\langle 34|  \Big) \nn\\
+%
+&= \Big( \gamma_{13}^2 |13\rangle\langle 13|13\rangle\langle 13| + \gamma_{14}^2 |14\rangle\langle 14|14\rangle\langle 14| + \gamma_{23}^2 |23\rangle\langle 23|23\rangle\langle 23| \nn\\
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \ \ \ \ \ \ \ \ \ \ \ \ \ \ +  \gamma_{24}^2 |24\rangle\langle 24|24\rangle\langle 24| + \gamma_{34}^2 |34\rangle\langle 34|34\rangle\langle 34|  \Big) \nn\\
+%
+&= \Big( \gamma_{13}^2 |13\rangle\langle 13| + \gamma_{14}^2 |14\rangle\langle 14| + \gamma_{23}^2 |23\rangle\langle 23| + \gamma_{24}^2 |24\rangle\langle 24| + \gamma_{34}^2 |34\rangle\langle 34|  \Big),
+\end{align}
+where every single cross term vanishes due to the orthogonality of the states. With this in mind, let us consider the second term of $E^{(3)}$. We note that we already know the action of $\hat V$ on $|12\rangle$ from the calculation of $E^{(2)}$, so we start from there
+\begin{align}
+E^{(3)}_\text{second term} &= E^{(1)}\langle \phi_1 |\hat V \hat R^2 \hat V |\phi_1\rangle \nn\\
+%
+&= \frac{1}{2}g^2 \Big\langle 12 \Big| \hat V \hat R^2 \Bigg[ 2\Big|12\Big\rangle +  \Big|13\Big\rangle + \Big|14\Big\rangle + \Big|23\Big\rangle + \Big|24\Big\rangle\Bigg] \nn\\
+%
+&= \frac{1}{2}g^2 \Big\langle 12 \Big| \hat V \Bigg[  \gamma_{13}^2\Big|13\Big\rangle + \gamma_{14}^2\Big|14\Big\rangle + \gamma_{23}^2\Big|23\Big\rangle + \gamma_{24}^2\Big|24\Big\rangle\Bigg] \nn\\
+%
+&= \frac{1}{2}g^2 \Big(  \gamma_{13}^2\big\langle12\big|\hat V\big|13\big\rangle + \gamma_{14}^2\big\langle12\big|\hat V\big|14\big\rangle + \gamma_{23}^2\big\langle12\big|\hat V\big|23\big\rangle + \gamma_{24}^2\big\langle12\big|\hat V\big|24\big\rangle \Big).
+\end{align}
+Lastly, we consider the first term of $E^{(3)}$ and find
+\begin{align}
+E^{(3)}_\text{first term} &= \langle \phi_1 |\hat V \hat R \hat V \hat R \hat V |\phi_1\rangle \nn\\
+%
+&= -\frac{1}{2}g \big\langle 12 \big| \hat V \hat R \hat V \Big[ \gamma_{13}\big| 13\big\rangle + \gamma_{14}\big| 14\big\rangle +\gamma_{23} \big| 23\big\rangle + \gamma_{24} \big| 24\big\rangle \Big] \nn\\
+%
+&= \frac{1}{4}g^2 \big\langle 12 \big| \hat V \hat R \bigg[ \gamma_{13}\Big(2\big| 13\big\rangle + \big| 14\big\rangle + \big| 23\big\rangle + \big| 34\big\rangle \Big) \nn\\
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + \gamma_{14}\Big(2\big| 14\big\rangle + \big| 13\big\rangle + \big| 24\big\rangle + \big| 34\big\rangle \Big) \nn\\ 
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + \gamma_{23}\Big(2\big| 23\big\rangle + \big| 24\big\rangle + \big| 13\big\rangle + \big| 34\big\rangle \Big) \nn\\ 
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + \gamma_{24}\Big(2\big| 24\big\rangle + \big| 14\big\rangle + \big| 23\big\rangle + \big| 34\big\rangle \Big)\bigg] \nn\\ 
+%
+&= \frac{1}{4}g^2 \big\langle 12 \big| \hat V \bigg[ \gamma_{13}^2\Big(2\big| 13\big\rangle + \big| 14\big\rangle + \big| 23\big\rangle + \big| 34\big\rangle \Big) \nn\\
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + \gamma_{14}^2\Big(2\big| 14\big\rangle + \big| 13\big\rangle + \big| 24\big\rangle + \big| 34\big\rangle \Big) \nn\\ 
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + \gamma_{23}^2\Big(2\big| 23\big\rangle + \big| 24\big\rangle + \big| 13\big\rangle + \big| 34\big\rangle \Big) \nn\\ 
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + \gamma_{24}^2\Big(2\big| 24\big\rangle + \big| 14\big\rangle + \big| 23\big\rangle + \big| 34\big\rangle \Big)\bigg] \nn\\ 
+%
+&= \frac{1}{4}g^2 \bigg[ \gamma_{13}^2\Big(2\big\langle 12 \big| \hat V \big| 13\big\rangle + \big\langle 12 \big| \hat V \big| 14\big\rangle + \big\langle 12 \big| \hat V \big| 23\big\rangle + \big\langle 12 \big| \hat V \big| 34\big\rangle \Big) \nn\\
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + \gamma_{14}^2\Big(2\big\langle 12 \big| \hat V \big| 14\big\rangle + \big\langle 12 \big| \hat V \big| 13\big\rangle + \big\langle 12 \big| \hat V \big| 24\big\rangle + \big\langle 12 \big| \hat V \big| 34\big\rangle \Big) \nn\\ 
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + \gamma_{23}^2\Big(2\big\langle 12 \big| \hat V \big| 23\big\rangle + \big\langle 12 \big| \hat V \big| 24\big\rangle + \big\langle 12 \big| \hat V \big| 13\big\rangle + \big\langle 12 \big| \hat V \big| 34\big\rangle \Big) \nn\\ 
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + \gamma_{24}^2\Big(2\big\langle 12 \big| \hat V \big| 24\big\rangle + \big\langle 12 \big| \hat V \big| 14\big\rangle + \big\langle 12 \big| \hat V \big| 23\big\rangle + \big\langle 12 \big| \hat V \big| 34\big\rangle \Big) \bigg].
+\end{align}
+
+We note that $\langle PQ|\hat V | RS\rangle $ are simply elements of the FCI Hamiltonian (because the offdiagonal elements of $\hat H$ have vanishing $\hat H_0$ contributions). This means we need the first row of elements from the FCI matrix.
+
+\begin{exframe}
+\begin{itemize}
+  \item[e)] Compute the ground-state energy to third order in Rayleigh-Schrödinger pertubation theory, i.e. compute the third order expansion in $g$, 
+  \begin{align}
+  E_\text{RSPT3}(g) &= E^{(0)} + gE^{(1)} + g^2E^{(2)} + g^3E^{(3)}.
+  \end{align}
+\end{itemize}
+\end{exframe}
+The relevant parts of the {\sc Matlab} code for computing the third order expansion in $g$ is shown in the appendix. The entire code is available at \url{https://github.com/mortele/FYS-KJM4480/tree/master/Project2}.
 
 
 
 
-
-
-
-
-
+\subsection*{Appendix}
+\subsubsection*{Code for exercise 2}
+\lstinputlisting[language=Matlab, firstline=14, lastline=105]{exercise2.m}
 
 
 \end{document}
@@ -800,4 +1031,12 @@ Inserting the definitions $\epsilon_p$ and $\hat V$ with $\hat P_p$ and $\hat P^
 % \end{figure}
  
 % \lstinputlisting[firstline=1,lastline=2, float=p!, caption={}, label=lst:1]{<code>.m}
+
+
+
+
+
+
+
+
 
