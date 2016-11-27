@@ -194,27 +194,3 @@ if plotting
     set(leg, 'FontSize', 16, 'Interpreter', 'latex');
     
 end
-
-
-%%
-ax = gca;
-outerpos = ax.OuterPosition;
-ti = ax.TightInset; 
-left = outerpos(1) + ti(1);
-bottom = outerpos(2) + ti(2);
-ax_width = outerpos(3) - ti(1) - ti(3);
-ax_height = outerpos(4) - ti(2) - ti(4);
-ax.Position = [left bottom ax_width ax_height];    
-    %%
-
-load('mongo.mat');
-figure(10);
-hold on;
-plot(G, E_FCI(:,1), 'b-');
-plot(G, E_CID(:,1), 'r-');
-plot(G, E_RS3, 'k-');
-plot(g_, e_, 'g-');
-leg = legend('FCI', 'CID', 'RS3', 'CCD');
-set(leg, 'FontSize', 16, 'Interpreter', 'latex');
-xlabel('$g$', 'FontSize', 16, 'Interpreter', 'latex');
-ylabel('G-S. Energy($g$)', 'FontSize', 16, 'Interpreter', 'latex');

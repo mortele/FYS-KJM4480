@@ -74,7 +74,6 @@ for i=1:N
     e_(i,1) = E(t_, g);
 end
 
-save('mongo', 'e_', 'g_');
 %% Plot the resulting energy
 figure(1);
 plot(g_, e_, 'r-');
@@ -82,14 +81,5 @@ xlabel('$g$', 'FontSize', 16, 'interpreter', 'latex');
 ylabel('G-S. energy', 'FontSize', 16, 'interpreter', 'latex');
 leg = legend('CCD');
 set(leg, 'FontSize', 16, 'interpreter', 'latex');
-
-ax = gca;
-outerpos = ax.OuterPosition;
-ti = ax.TightInset; 
-left = outerpos(1) + ti(1);
-bottom = outerpos(2) + ti(2);
-ax_width = outerpos(3) - ti(1) - ti(3);
-ax_height = outerpos(4) - ti(2) - ti(4);
-ax.Position = [left bottom ax_width ax_height]; 
 
 end
