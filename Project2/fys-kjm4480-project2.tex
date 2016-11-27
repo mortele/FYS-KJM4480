@@ -1186,20 +1186,119 @@ Additionally, we know (from Crawford and Schaefer) that the only non-zero contri
 \begin{itemize}
   \item[e)] Prove (at least) two of the following equations. You must use the generalized Wick's theorem for products of normal-ordered strings, and make sure you take care of the $\{\cdots\}_c$ restriction for the contractions.
   \begin{align}
-  \langle \Phi_{i\bar i}^{a\bar a} |\hat V_N |\Phi\rangle &= -\frac{g}{2}
+  \langle \Phi_{i\bar i}^{a\bar a} |\hat V_N |\Phi\rangle &= -\frac{g}{2} \\
+  \langle \Phi_{i\bar i}^{a\bar a} |\left\{\hat F_N \hat T  \right\}_c |\Phi\rangle &= 2(f_a - f_i)t_i^a \\
+  & \dots \nn
   \end{align}
 \end{itemize}
 \end{exframe}
+For simplicity, we just choose the two first equations. The first of which yields
+\begin{align}
+\langle \Phi_{k\bar k}^{c\bar c}| \hat V_N | \Phi\rangle &= \langle \Phi_{i\bar i}^{a\bar a}| -\frac{1}{2}g \sum_{pq} \left\{ \cppd \cpmd \cqm \cqp \right\} | \Phi\rangle \nn\\
+%
+&= -\frac{g}{2}\langle \Phi_{k\bar k}^{c\bar c}| \sum_{ij} \left\{ c_{i+}^\dagger c_{i-}^\dagger c_{j-}c_{j+} \right\} + \sum_{ia} \left\{ c_{i+}^\dagger c_{i-}^\dagger c_{a-}c_{a+} \right\} + \nn\\
+%
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \sum_{ai} \left\{ c_{a+}^\dagger c_{a-}^\dagger c_{i-}c_{i+} \right\} + \sum_{ab} \left\{ c_{a+}^\dagger c_{a-}^\dagger c_{b-}c_{b+} \right\}| \Phi\rangle,
+\end{align}
+where we note that applying the first sum gives only a single non-zero contribution when $i=j=k$. But this leaves the ket-state in $|\Phi\rangle$, which gives a zero contribution when taking the inner product with $\langle \Phi_{k \bar k}^{c\bar c}|$. The second sum, over $i$ and $a$, vanishes because it tries to both create states which are contained in $|\Phi\rangle$, \emph{and} destroy states which are not in it. Applying the operator string in the third sum, over $a$ and $i$, gives a resulting state $|\Phi_{i\bar i}^{a\bar a}\rangle$, which when combined with the bra-state will give $\sum_{ia}\delta_{ik}\delta_{ac}=1$. The last sum term vanishes also, because no $a$-states are contained in the reference Slater determinant. This means that
+\begin{align}
+\langle \Phi_{k\bar k}^{c\bar c}| \hat V_N | \Phi\rangle &= -\frac{g}{2} \langle \Phi_{k\bar k}^{c\bar c}| \sum_{ai} \left\{ c_{a+}^\dagger c_{a-}^\dagger c_{i-}c_{i+} \right\} | \Phi\rangle \nn\\
+%
+&= -\frac{g}{2}\langle \Phi_{k\bar k}^{c\bar c}| \left(\sum_{ai} \Phi_{i\bar i}^{a\bar a}\rangle \right) \nn\\
+%
+&= -\frac{g}{2}\sum_{ai} \langle \Phi_{k\bar k}^{c\bar c}|\Phi_{i\bar i}^{a\bar a}\rangle = -\frac{g}{2}\sum_{ai}\delta_{ik}\delta_{ac} = -\frac{g}{2}.
+\end{align}
+
+For the second equation, we find 
+\begin{align}
+\langle \Phi_{k\bar k}^{c\bar c}|\left\{\hat F_N \hat T  \right\}_c |\Phi\rangle &= \langle \Phi_{k\bar k}^{c\bar c}| \sum_{\ps ia} f_p t_i^a \left\{ c_\ps^\dagger c_\ps \right\}\left\{ c_{a+}^\dagger c_{a-}^\dagger c_{i-} c_{i+} \right\} | \Phi\rangle \nn\\
+%
+&= \langle \Phi_{k\bar k}^{c\bar c}| \sum_{\ps ia} f_p t_i^a \bigg[\left\{ c_\ps^\dagger c_\ps  c_{a+}^\dagger c_{a-}^\dagger c_{i-} c_{i+} \right\} \nn\\
+%
+& \ \ \ \ \ \  \ \ \ \ \ \  \ \ \ \ \ \  \ \ \ \ \ \   +\Big\{ \contraction[2ex]{}{c_\ps^\dagger}{c_\ps}{c_{a+}^\dagger}c_\ps^\dagger c_\ps  c_{a+}^\dagger c_{a-}^\dagger c_{i-} c_{i+} \Big\}  \nn\\
+%
+& \ \ \ \ \ \  \ \ \ \ \ \  \ \ \ \ \ \  \ \ \ \ \ \  \ \ \ \ \ \ +\Big\{ \contraction[2ex]{}{c_\ps^\dagger}{c_\ps c_{a+}^\dagger}{c_{a-}^\dagger}c_\ps^\dagger c_\ps  c_{a+}^\dagger c_{a-}^\dagger c_{i-} c_{i+} \Big\}  \nn\\
+%
+& \ \ \ \ \ \  \ \ \ \ \ \  \ \ \ \ \ \  \ \ \ \ \ \  \ \ \ \ \ \ \ \ \ \ \ \ +\Big\{ \contraction[2ex]{}{c_\ps^\dagger}{c_\ps c_{a+}^\dagger c_{a-}^\dagger}{c_{i-}}c_\ps^\dagger c_\ps  c_{a+}^\dagger c_{a-}^\dagger c_{i-} c_{i+} \Big\} \nn\\
+%
+& \ \ \ \ \ \  \ \ \ \ \ \  \ \ \ \ \ \  \ \ \ \ \ \  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\Big\{ \contraction[2ex]{}{c_\ps^\dagger}{c_\ps c_{a+}^\dagger c_{a-}^\dagger c_{i-}}{c_{i+}}c_\ps^\dagger c_\ps  c_{a+}^\dagger c_{a-}^\dagger c_{i-} c_{i+} \Big\} \bigg] | \Phi\rangle,
+\end{align}
+where we only show the non-zero contractions (note that we only consider contractions where at least one of the operators from $\hat F_N$ are contracted with one of the operators from $\hat T$, as per the $c$ subscript on the normal-ordering). We note, before going on, that the non-contracted part of the previous equation will give a vanishing contribution to the total expression, since normal ordering with respect to the Fermi vacuum will give an unequal amount of creation and annihilation operators in the operator string (this holds both for $p$ above \emph{and} below the Fermi level). For the remaining terms, we find
+\begin{align}
+\langle \Phi_{k\bar k}^{c\bar c}|\left\{\hat F_N \hat T  \right\}_c |\Phi\rangle &= \langle \Phi_{k\bar k}^{c\bar c}| \sum_{\ps ia} f_p t_i^a \bigg[ -\Big\{  c_\ps c_{a-}^\dagger c_{i-} c_{i+} \Big\}\delta_{pa}\delta_{\sigma +}  -\Big\{  c_\ps  c_{a+}^\dagger  c_{i-} c_{i+} \Big\} \delta_{pa}\delta_{\sigma -} \nn\\
+%
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\Big\{ c_\ps  c_{a+}^\dagger c_{a-}^\dagger c_{i+} \Big\}\delta_{pi}\delta_{\sigma -} +\Big\{  c_\ps  c_{a+}^\dagger c_{a-}^\dagger c_{i-}  \Big\} \delta_{pi}\delta_{\sigma +}\bigg] | \Phi\rangle \nn\\
+%
+&= \langle \Phi_{k\bar k}^{c\bar c}| \sum_{ia} t_i^a \bigg[ -f_a \Big\{  c_{a+}^\dagger c_{a-}^\dagger c_{i-} c_{i+} \Big\}  -f_a\Big\{  c_{a-}^\dagger c_{a+}^\dagger  c_{i-} c_{i+} \Big\}  \nn\\
+%
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + f_i \Big\{ c_{i-}  c_{a+}^\dagger c_{a-}^\dagger c_{i+} \Big\} + f_i\Big\{  c_{i+} c_{a+}^\dagger c_{a-}^\dagger c_{i-}  \Big\} \bigg] | \Phi\rangle \nn\\
+%
+&= \langle \Phi_{k\bar k}^{c\bar c}| \sum_{ia} t_i^a \bigg[ f_i| \Phi_{i\bar i}^{a\bar a}\rangle + f_i| \Phi_{i\bar i}^{a\bar a}\rangle - f_a| \Phi_{i\bar i}^{a\bar a}\rangle - f_a| \Phi_{i\bar i}^{a\bar a}\rangle \bigg] \nn\\
+%
+&= 2\sum_{ia} t_i^a \big[f_i \delta_{ac}\delta_{ik} - f_a \delta_{ac}\delta_{ik}\big] = 2\big(f_c - f_k\big)t_k^c.
+\end{align}
+We note that the index names do not matter, so we may aswell relabel this equation ($k\rightarrow i$ and $c\rightarrow a$) to yield the exact requested result, $\langle \Phi_{i\bar i}^{a\bar a} |\left\{\hat F_N \hat T  \right\}_c |\Phi\rangle = 2(f_a - f_i)t_i^a$.
 
 
+\begin{exframe}
+\begin{itemize}
+  \item[f)] Show that $F^a_i(t)=0$ is equivalent to
+  \begin{align}
+  t_i^a = \left[2(f_i-f_a)+\sigma \right]^{-1} \left[  \sigma t_i^a - \frac{g}{2}\left( 1 + \sum_b t_i^b + \sum_j t_j^a + t_1^3 t_2^4 + t_1^4 t_2^3 - t_i^a\sum_{bj} t_j^b \right) \right].
+  \end{align}
+\end{itemize}
+\end{exframe}
+We consider the amplitude equation, inserting a shift parameter $\sigma$, and find
+\begin{align}
+0=F_i^a(t)&=2(f_a-f_i)t_i^a - \frac{g}{2}\left(1+\sum_b t_i^b + \sum_j t_j^a + \sum_b t_i^b \sum_j t_j^a \right) \nn\\
+0 &= 2(f_a-f_i)t_i^a - \frac{g}{2}\left(1+\sum_b t_i^b + \sum_j t_j^a + \sum_b t_i^b \sum_j t_j^a \right) +\sigma t_i^a - \sigma t_i^a \nn\\
+%
+2(f_i - f_a)t_i^a+ \sigma t_i^a &=\sigma t_i^a - \frac{g}{2}\left(1+\sum_b t_i^b + \sum_j t_j^a + \sum_b t_i^b \sum_j t_j^a \right) \nn\\
+%
+t_i^a \Big[2(f_i - f_a)+ \sigma \Big] &=\sigma t_i^a - \frac{g}{2}\left(1+\sum_b t_i^b + \sum_j t_j^a + \sum_b t_i^b \sum_j t_j^a \right) \nn\\
+%
+t_i^a &= \frac{1}{\Big[2(f_i - f_a)+ \sigma \Big]} \left[\sigma t_i^a - \frac{g}{2}\left(1+\sum_b t_i^b + \sum_j t_j^a + \sum_b t_i^b \sum_j t_j^a \right) \right], \label{eq:12}
+\end{align}
+where the $\sigma$ parameter deals with the case of $f_i=f_a$ which would have given an undefined amplitude otherwise.
 
+\begin{exframe}
+\begin{itemize}
+  \item[g)] Let the right-hand side of \eq{12} be defined as $G_i^a(t)$. Defined the iteration
+  \begin{align}
+  \big( t^{(k+1)} \big)_i^a = G_i^a\big(t^{(k)} \big).
+  \end{align}
+  For $g\in [-1,1]$, solve the amplitude equations by iterating this, using $t^{(0)}=0$ as initial guess. Play around with $\sigma$ until you get convergence for all $g\in[-1,1]$. You will need around $50\--100$ iterations to reach machine precision.
+\end{itemize}
+\end{exframe}
+\begin{figure}[p]
+\centering
+\includegraphics[width=12cm]{CCD_E.pdf}
+\caption{Ground-state energy as a function of the interaction strength parameter $g$ for the coupled cluster doubles approach. \label{fig:20}}
+\end{figure}
+The relevant parts of the {\sc Matlab} code for performing the CCD iterations is shown in the appendix. The entire code is available at \url{https://github.com/mortele/FYS-KJM4480/tree/master/Project2}.
 
+The resulting ground state energies as a function of $g$ is shown in \fig{20}. We found that a $\sigma$ value of $-0.5$ produced convergence for all values of $g$, using a tollerance of $10^{-15}\propto\text{machine precision}$.
+
+\begin{exframe}
+\begin{itemize}
+  \item[h)] Plot the FCI energy, the CCD energy, and the RSPT energy in one plot and comment your results. 
+\end{itemize}
+ \end{exframe} 
+ \begin{figure}[p]
+\centering
+\includegraphics[width=12cm]{ALL_E.pdf}
+\caption{Comparison of the ground-state energies produced by the different methods (FCI, CID, CCD, and RSPT3). We note the deviation of the RSPT energies from the rest for large $|g|$, which we interpret as a probable error in the {\sc Matlab} code somewhere. \label{fig:30}}
+\end{figure}
+The comparison plot is shown in \fig{30}. We note at once that there apparently is an error in the code for computing the Rayleigh-Schrödinger pertubation theory, as this energy deviates \emph{a lot} from the other methods. We have unfortunately been unable to find this bug.
+
+Also worth noting is the fact that the CCD energy underestimates the actual ground-state energy (the FCI energy) by quite a large margin for large $g$. This is the possible because coupled cluster is a non-variational method, and so may yield energies below the actual ground state. 
 
 \newpage
 \subsection*{Appendix}
 \subsubsection*{Code for exercise 2}
 \lstinputlisting[language=Matlab, firstline=14, lastline=109]{exercise2.m}
-
+\subsubsection*{Code for exercise 3}
+\lstinputlisting[language=Matlab, firstline=15, lastline=75]{exercise3.m}
 
 \end{document}
 
