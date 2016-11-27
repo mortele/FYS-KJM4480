@@ -44,6 +44,8 @@ CID     = zeros(basisSize-1, basisSize-1);
 G       = linspace(-1,1,n); 
 E_FCI   = zeros(n,basisSize);
 E_CID   = zeros(n,basisSize-1);
+E_RS1   = zeros(n,1);
+E_RS2   = zeros(n,1);
 E_RS3   = zeros(n,1);
 f_FCI   = zeros(n,1);
 f_CID   = zeros(n,1);
@@ -98,7 +100,11 @@ for k=1:n
                      gamma(4)^2*FCI(1,4) + gamma(5)^2*FCI(1,5));
     E3  = E3A + E3B;
     
-    e_RS3      = E0 + g*E1;% + g^2*E2 + g^3*E3;
+    e_RS1      = E0 + E1;
+    e_RS2      = e_RS1 + E2;
+    e_RS3      = e_RS2 + E3;
+    E_RS1(k,1) = e_RS1;
+    E_RS2(k,1) = e_RS2;
     E_RS3(k,1) = e_RS3;
 end
 
@@ -168,10 +174,23 @@ if plotting
     set(leg, 'FontSize', 16, 'Interpreter', 'latex');
     
     figure(5);
-    plot(G, e_RS3, 'r-');
-    xlabel('g', 'FontSize', 16, 'Interpreter', 'latex');
-    ylabel('E0', 'FontSize', 16, 'Interpreter', 'latex');
-    leg = legend('RSPT3');
+    hold('on');
+    plot(G, E_RS1, 'b--');
+    plot(G, E_RS2, 'r--');
+    plot(G, E_RS3, 'k-');
+    xlabel('$g$', 'FontSize', 16, 'Interpreter', 'latex');
+    ylabel('G-S. Energy($g$)', 'FontSize', 16, 'Interpreter', 'latex');
+    leg = legend('RSPT1','RSPT2','RSPT3');
+    set(leg, 'FontSize', 16, 'Interpreter', 'latex');
+    
+    figure(6);
+    hold('on');
+    plot(G, E_FCI(:,1), 'b-');
+    plot(G, E_CID(:,1), 'r-');
+    plot(G, E_RS3, 'k-');
+    xlabel('$g$', 'FontSize', 16, 'Interpreter', 'latex');
+    ylabel('G-S. Energy($g$)', 'FontSize', 16, 'Interpreter', 'latex');
+    leg = legend('FCI','CID','RSPT3');
     set(leg, 'FontSize', 16, 'Interpreter', 'latex');
     
 end

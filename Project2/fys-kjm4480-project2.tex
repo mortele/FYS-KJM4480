@@ -1010,14 +1010,195 @@ We note that $\langle PQ|\hat V | RS\rangle $ are simply elements of the FCI Ham
   \end{align}
 \end{itemize}
 \end{exframe}
-The relevant parts of the {\sc Matlab} code for computing the third order expansion in $g$ is shown in the appendix. The entire code is available at \url{https://github.com/mortele/FYS-KJM4480/tree/master/Project2}.
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{RS_E.pdf}
+\caption{Ground state energy correction computed by third order Rayleigh-Schrödinger pertubation theory. First and second order is also shown. \label{fig:6}}
+\end{figure}
+The relevant parts of the {\sc Matlab} code for computing the third order expansion in $g$ is shown in the appendix. The entire code is available at \url{https://github.com/mortele/FYS-KJM4480/tree/master/Project2}. The resulting energy is shown for first, second, and third order expansion in \fig{6}.
+
+
+
+\subsection*{Exercise 3}
+The last task is a coupled-cluster treatment, with doubles only, CCD. We will use a doubles operator on the form 
+\begin{align}
+\hat T = \sum_{ia} t^a_i b_{a+}^\dagger b_{i+}^\dagger b_{a-}^\dagger b_{i-}^\dagger = \sum_{ia} t^a_i \hat P_a^\dagger \hat P_i.
+\end{align}
+\begin{exframe}
+\begin{itemize}
+  \item[a)] Write down the general CCD wavefunction in terms of $\hat T$ and $|\Phi\rangle$. Explain why the exponential truncates after second-order terms for our model.
+\end{itemize}
+\end{exframe}
+The general CCD wavefunction can be written as 
+\begin{align}
+|\Phi_\text{CCD}\rangle &= \left(1 + \hat T + \frac{1}{2!}\hat T^2 + \frac{1}{3!}\hat T^3 + \dots \right) |\Phi\rangle. \label{eq:6}
+\end{align}
+If we consider the action of $\hat T$ on $|\Phi\rangle$ we find
+\begin{align}
+\hat T |\Phi\rangle &= \sum_{ia} t^a_i \hat P_a^\dagger \hat P_i |12\rangle \nn\\
+%
+&= \sum_{a} \hat P_a^\dagger \big[ t^a_2|1\rangle +  t^a_1|2\rangle \big] \nn\\
+%
+&=  t^3_2|13\rangle + t^4_2|14\rangle + t^3_1|23\rangle + t^4_1|24\rangle.
+\end{align}
+Applying $\hat T$ a second time, we find
+\begin{align}
+\hat T^2 |\Phi\rangle &= \hat T\Big[ t^3_2|13\rangle + t^4_2|14\rangle + t^3_1|23\rangle + t^4_1|24\rangle \Big] \nn\\
+%
+&= \sum_{ia} t^a_i \hat P^\dagger_a \hat P_i  \Big[ t^3_2|13\rangle + t^4_2|14\rangle + t^3_1|23\rangle + t^4_1|24\rangle \Big] \nn\\
+%
+&= \sum_{a} \hat P^\dagger_a \Big[ t_1^at^3_2|3\rangle + t_1^at^4_2|4\rangle + t^a_2t^3_1|3\rangle + t_2^at^4_1|4\rangle \Big] \nn\\
+%
+&= t_1^4t^3_2|34\rangle + t_1^3t^4_2|34\rangle + t^4_2t^3_1|34\rangle + t_2^3t^4_1|34\rangle \nn\\
+%
+&= \Big[ t_1^4t^3_2 + t_1^3t^4_2 + t^4_2t^3_1 + t_2^3t^4_1 \Big] |34\rangle, \label{eq:9}
+\end{align}
+from which we note that $\hat T^3 |\Phi\rangle=0$ since there are no orbitals in the state left \emph{under} the Fermi level and so applying $\sum_i \hat P_i$ yields zero. This obviously means the expansion in \eq{6} truncates after two terms, which gives the CCD wavefunction as
+\begin{align}
+|\Phi_\text{CCD}\rangle &= \left(1 + \hat T + \frac{1}{2}\hat T^2 \right) |\Phi\rangle. \label{eq:7}
+\end{align}
+
+\begin{exframe}
+\begin{itemize}
+  \item[b)] In a similar manner, write down the general CID wavefunction in intermediate normalization, $\langle \Phi | \Psi_\text{CID}\rangle=1$. Compare with the CCD wavefunction.
+\end{itemize}
+\end{exframe}
+The general CI wavefunction can be written as 
+\begin{align}
+|\Psi_\text{CI}\rangle &= c_0 |\Phi\rangle + \sum_i \sum_a c_i^a |\Phi^a_i\rangle + \sum_{ij} \sum_{ab} c_{ij}^{ab} |\Phi^{ab}_{ij}\rangle + \sum_{ijk} \sum_{abc} c_{ijk}^{abc} |\Phi^{abc}_{ijk}\rangle + \dots,
+\end{align}
+with the constants $c_{ijk\dots}^{abc\dots} = \langle \Phi_{ijk\dots}^{abc\dots} |\Psi_\text{CI}\rangle$. Specifically, the CID wavefunction can be written as 
+\begin{align}
+|\Psi_\text{CID}\rangle &= c_0 |\Phi\rangle + \sum_{ij} \sum_{ab} c_{ij}^{ab} |\Phi^{ab}_{ij}\rangle. \label{eq:8}
+\end{align}
+Comparing now Eqs. (\ref{eq:6}) and (\ref{eq:8}), we see striking similarities but the CID wavefunction is lacking the quadruple excitations in $\hat T^2$.
+
+\begin{exframe}
+\begin{itemize}
+  \item[c)] Explain that the CCD energy can be written 
+  \begin{align}
+  E_\text{CCD} = \langle \Phi | \hat H(1+\hat T)|\Phi\rangle. \label{eq:10}
+  \end{align}
+  Compute $E_\text{CCD}$ as a function of the amplitudes $t^a_i$ in our model, and show that it becomes equal to 
+  \begin{align}
+  E_\text{CCD} = 2\varepsilon_1 + 2\varepsilon_2 - g - \frac{g}{2}\sum_{ia}t^a_i
+  \end{align}
+\end{itemize}
+\end{exframe}
+From Crawford and Schaefer, we know that the CCD energy can be written as
+\begin{align}
+E_\text{CCD} &= \langle \Phi | \hat H \left(1+  \hat T + \frac{1}{2}\hat T^2 + \dots \right) | \Phi \rangle \nn\\
+%
+&= \langle \Phi | \hat H \left(1+  \hat T + \frac{1}{2}\hat T^2 \right) | \Phi \rangle \nn\\
+%
+&= \langle \Phi | \hat H |\Phi\rangle + \langle \Phi | \hat H \hat T|\Phi\rangle + \frac{1}{2}\langle \Phi | \hat H\hat T^2 |\Phi\rangle.
+\end{align}
+Let us consider the $\langle \Phi | \hat H\hat T^2 |\Phi\rangle$ term
+\begin{align}
+\langle \Phi | \hat H\hat T^2 |\Phi\rangle &= \langle 12 | \Big(\hat H_0 + \hat V\Big) \Big[ t^3_2|13\rangle + t^4_2|14\rangle + t^3_1|23\rangle + t^4_1|24\rangle \Big] \nn\\
+%
+&= \langle 12 | \hat V \Big[ t_1^4t^3_2 + t_1^3t^4_2 + t^4_2t^3_1 + t_2^3t^4_1 \Big] |34\rangle \nn\\
+%
+&= \Big[ t_1^4t^3_2 + t_1^3t^4_2 + t^4_2t^3_1 + t_2^3t^4_1 \Big]  \cancelto{0}{\langle 12 | \hat V |34\rangle },
+\end{align}
+where the matrix element vanishes because of the Slater-Condon rule stating that any matrix element of the Hamiltonian with more than two differing indices vanishes. Thus we are left only with \eq{10}.
+
+In terms of the amplitudes, we find the energy to equal
+\begin{align}
+E_\text{CCD} &= \langle \Phi | \hat H (1+  \hat T ) | \Phi \rangle \nn\\
+%
+&= 2\varepsilon_1 + 2\varepsilon_2 - g + \langle 12 | \hat H \hat T| 12 \rangle \nn\\
+%
+&= 2\varepsilon_1 + 2\varepsilon_2 - g + \langle 12 | \hat H \Big[ t^3_2|13\rangle + t^4_2|14\rangle + t^3_1|23\rangle + t^4_1|24\rangle \Big] \nn\\
+%
+&= 2\varepsilon_1 + 2\varepsilon_2 - g + \langle 12 | \hat V \Big[ t^3_2|13\rangle + t^4_2|14\rangle + t^3_1|23\rangle + t^4_1|24\rangle \Big] \nn\\
+%
+&= 2\varepsilon_1 + 2\varepsilon_2 - g - \frac{1}{2}g\Big[\langle 1| + \langle 2 | \Big] \Big[ t^3_2|1\rangle + t^4_2|1\rangle + t^3_1|2\rangle + t^4_1|2\rangle \Big] \nn\\
+%
+&=  2\varepsilon_1 + 2\varepsilon_2 - g - \frac{1}{2}g\Big[ t^3_2+ t^4_2+ t^3_1+ t^4_1 \Big] \nn\\
+%
+&=  2\varepsilon_1 + 2\varepsilon_2 - g - \frac{g}{2}\sum_{ia} t^a_i,
+\end{align}
+where we have used that all the off-diagonal elements of $\hat H$ have no $\hat H_0$ contribution, and so $\hat H\rightarrow \hat V$ in the fourth equality. We have also used \eq{5} to compute $\langle \Phi |\hat H | \Phi\rangle$.
+
+
+\begin{exframe}
+We now evaluate the normal-ordered Hamiltonian, in order to find the amplitude equations. The Hamiltoninan can be written 
+\begin{align}
+\hat H = \langle \Phi | \hat H |\Phi\rangle + \underbrace{\hat F_N + \hat V_N}_{\hat H_N}.
+\end{align}
+The normal-ordered Fock operator can be written 
+\begin{align}
+\hat F_N = \sum_\ps f_p \left\{ c_\ps^\dagger c_\ps \right\}, \ \ \ f_i=\varepsilon_i - \frac{1}{2}g, \ \ \ f_a=\varepsilon_a. \label{eq:11}
+\end{align}
+The normal-ordered two-body interaction is 
+\begin{align}
+\hat V_N = -\frac{g}{2}\sum_{pq} \left\{ \cppd \cpmd \cqm \cqp \right\}
+\end{align}
+\begin{itemize}
+  \item[d)] Show \eq{11}. Explain why the Baker-Campbell-Hausdorff expansion truncates after \emph{two} nested commutators in this case, and explain that the amplitude equations simplify to
+  \begin{align}
+  \langle \Phi_{i\bar i}^{a \bar a} | \left\{\hat F_N \hat T \right\}_c | \Phi\rangle + \langle \Phi_{i\bar i}^{a \bar a} | \left\{\hat V_N \left(1 +\hat T + \frac{1}{2}\hat T^2\right) \right\}_c | \Phi\rangle  = 0, \ \ \ \forall \, i,a
+  \end{align}
+  Explain the $\{\cdots\}_c$ notation.
+\end{itemize}
+\end{exframe}
+Writing $\hat H$ in terms of normal-ordered operators and contractions yields for the $\hat H_0$ term
+\begin{align} %\bcontraction[2ex]{skipFirst}{A}{skipMiddle}{B}
+\hat H_0 &= \sum_\ps \varepsilon_p c_\ps^\dagger c_\ps \nn\\
+%
+&= \sum_\ps \varepsilon_p\left\{ c_\ps^\dagger c_\ps \right\} + \sum_\ps \contraction[1ex]{}{c_\ps^\dagger}{}{c_\ps} c_\ps^\dagger c_\ps \nn\\
+%
+&= \sum_\ps \varepsilon_p\left\{ c_\ps^\dagger c_\ps \right\} + \sum_{i\sigma}\varepsilon_i \delta_{ii}.
+\end{align}
+From the $\hat V$ term we find 
+\begin{align}
+\hat V &= -\frac{1}{2}g\sum_{pq} \cppd \cpmd \cqm \cqp \nn\\
+%
+&= -\frac{1}{2}g\sum_{pq} \left\{\cppd \cpmd \cqm \cqp \right\} -\frac{1}{2}g\sum_\text{contractions} \cdots,
+\end{align}
+with all the non-vanishing contractions being just
+\begin{align}
+\sum_\text{contractions} &= \big\{ \contraction[2ex]{}{\cppd}{\cpmd \cqm}{\cqp}\contraction[1ex]{\cppd}{\cpmd}{}{\cqm}\cppd \cpmd \cqm \cqp \big\} + \big\{\contraction{}{\cppd}{\cpmd \cqm}{\cqp}\cppd \cpmd \cqm \cqp \big\} + \big\{\contraction{\cppd}{\cpmd}{\cqm}{}\cppd \cpmd \cqm \cqp \big\} \nn\\
+%
+&= \delta_{pq} + \big\{ \cpmd \cqm \big\} \delta_{pq} + \big\{ \cppd \cqp \big\}.
+\end{align}
+We note that the normal-ordered operator strings in the previous equation are only non-zero for $p$ below the Fermi level, i.e. for indices $i$, and not for indices $a$. Putting this together we find that
+\begin{align}
+\hat H &= \sum_\ps \varepsilon_p\left\{ c_\ps^\dagger c_\ps \right\} + \sum_{i\sigma}\varepsilon_i \delta_{ii} \underbrace{-\frac{1}{2}g\sum_{pq} \left\{\cppd \cpmd \cqm \cqp \right\}}_{\hat V_N} \nn\\
+& \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\frac{1}{2}g \sum_{pq}\delta_{pq} -\frac{1}{2}g\sum_{ij}\delta_{ij}\left[\big\{ c_{i+}^\dagger c_{j+}\big\} + \big\{ c_{i-}^\dagger c_{j-} \big\} \right]\nn\\
+%
+&= \hat V_N -\frac{1}{2}g \sum_{pq}\delta_{pq}+ \sum_{i\sigma}\varepsilon_i \delta_{ii} + \underbrace{\sum_\ps \varepsilon_p\left\{ c_\ps^\dagger c_\ps \right\}-\frac{1}{2}g \sum_{i\sigma} \big\{ c_{i\sigma}^\dagger c_{i\sigma} \big\}}_{\hat F_N},
+\end{align}
+from which we can see that $\hat F_N=\sum_\ps f_p \big\{c_\ps^\dagger c_\ps \big\}$ with $f_i=\varepsilon_i-g/2$ for orbitals below the Fermi level, and $f_a=\varepsilon_a$.
+
+Moving on, we consider the CCD amplitude equations, $0=\langle \Phi_{ij}^{ab}|\bar H | \Phi\rangle$, where $\bar H$ denotes the similarity transformed normal-ordered Hamiltonian, $\bar H \equiv e^{-\hat T}\hat H_N e^{\hat T}$. Using the Baker-Campbell-Hausdorff expansion, this can be simplified greatly, and in our case the expansion terminates after just two commutators. These nested commutators will have contributions on the form $[\hat F_N, \hat T]$, $[[\hat F_N, \hat T], \hat T]$, etc., aswell as contributions on the form $[\hat V_N, \hat T]$, $[[\hat V_N, \hat T], \hat T]$, and so on. For the $\hat F_N$ terms, we note that terms on the form $\langle \Phi_{i\bar i}^{a \bar a} | \hat F_N \hat T^n|\Phi\rangle$ for $n\ge2$ will necessarily vanish since $\hat F_N$ is really just a number operator which does not change the state it acts on. But this means that in order for the resulting $\langle \Phi_{i\bar i}^{a\bar a}|\Phi'\rangle$ to be non-zero, at most one pair of pair creation and annihilation operators can be applied to the ket-state $|\Phi'\rangle$ (since $\hat T$ can not annihilate pairs \emph{above} the Fermi level and create pairs \emph{below} it, i.e. there is no way for $\hat T^2$ to bring you back to $|\Phi\rangle$ after $\hat T$ took you to $|\Phi_{k\bar k}^{c\bar c}\rangle$). This means the $\hat F_N$ terms will not contribute after the second term.
+
+Considering the $\hat V_N$ contributions, we need to consider the fact that after being excited from the reference state up to some pair $a\bar a$ by $\hat T$, $\hat V_N$ can take you down to the reference again (the restriction on the indices are not present in $\hat V_N$ as in $\hat T$). Since we need $\langle \Phi_{i\bar i}^{a\bar a}| \Phi'\rangle$ to be non-zero after all the $\hat T$-s and $\hat V_N$ have done their thing, we must demand that the operator string contains no more than two $\hat T$-s. Any more, and the contribution will be zero in the amplitude equations. This means that the $\hat V_N$ terms truncate after the third term.
+
+Overall, this means that the entire nested commutator truncated after the third term, i.e. just \emph{before} the $\hat T^3$ terms are introduced. 
+
+Additionally, we know (from Crawford and Schaefer) that the only non-zero contributions in the expansion are those in which $\hat H_N$ has at least one contraction with every $\hat T$ on its right. This is denoted with a subscript $c$ on the normal-ordering $\{\cdots\}_c$, meaning only terms in which the Hamiltonian is contracted to every cluster operator to the right is to be included.
+
+
+
+\begin{exframe}
+\begin{itemize}
+  \item[e)] Prove (at least) two of the following equations. You must use the generalized Wick's theorem for products of normal-ordered strings, and make sure you take care of the $\{\cdots\}_c$ restriction for the contractions.
+  \begin{align}
+  \langle \Phi_{i\bar i}^{a\bar a} |\hat V_N |\Phi\rangle &= -\frac{g}{2}
+  \end{align}
+\end{itemize}
+\end{exframe}
 
 
 
 
+
+\newpage
 \subsection*{Appendix}
 \subsubsection*{Code for exercise 2}
-\lstinputlisting[language=Matlab, firstline=14, lastline=105]{exercise2.m}
+\lstinputlisting[language=Matlab, firstline=14, lastline=109]{exercise2.m}
 
 
 \end{document}
